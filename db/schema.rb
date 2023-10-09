@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_10_09_115545) do
+ActiveRecord::Schema.define(version: 2023_10_09_131744) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -33,7 +33,15 @@ ActiveRecord::Schema.define(version: 2023_10_09_115545) do
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
-  create_table "locations", force: :cascade do |t|
+  create_table "maps", force: :cascade do |t|
+    t.float "lat"
+    t.float "lng"
+    t.string "text"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "pins", force: :cascade do |t|
     t.string "latitude"
     t.string "longitude"
     t.string "postal_code"
@@ -64,6 +72,17 @@ ActiveRecord::Schema.define(version: 2023_10_09_115545) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["customer_id"], name: "index_posts_on_customer_id"
+  end
+
+  create_table "rails", force: :cascade do |t|
+    t.string "g"
+    t.string "scaffold"
+    t.string "map"
+    t.float "lat"
+    t.float "lng"
+    t.string "text"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "tags", force: :cascade do |t|

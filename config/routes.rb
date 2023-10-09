@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
     
     
+  resources :pins
+  resources :rails
+  resources :maps
   devise_scope :customer do
     get '/customers/sign_out' => 'devise/sessions#destroy'
   end
