@@ -1,6 +1,6 @@
-class CreateLocations < ActiveRecord::Migration[6.1]
+class CreatePins < ActiveRecord::Migration[6.1]
   def change
-    create_table :locations do |t|
+    create_table :pins do |t|
       t.string :latitude
       t.string :longitude
       t.string :postal_code

@@ -1,0 +1,47 @@
+<%= form_with(model: rail) do |form| %>
+  <% if rail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(rail.errors.count, "error") %> prohibited this rail from being saved:</h2>
+
+      <ul>
+        <% rail.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :g %>
+    <%= form.text_field :g %>
+  </div>
+
+  <div class="field">
+    <%= form.label :scaffold %>
+    <%= form.text_field :scaffold %>
+  </div>
+
+  <div class="field">
+    <%= form.label :map %>
+    <%= form.text_field :map %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lat %>
+    <%= form.text_field :lat %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lng %>
+    <%= form.text_field :lng %>
+  </div>
+
+  <div class="field">
+    <%= form.label :text %>
+    <%= form.text_field :text %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

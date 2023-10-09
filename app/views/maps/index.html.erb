@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Maps</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Lat</th>
+      <th>Lng</th>
+      <th>Text</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @maps.each do |map| %>
+      <tr>
+        <td><%= map.lat %></td>
+        <td><%= map.lng %></td>
+        <td><%= map.text %></td>
+        <td><%= link_to 'Show', map %></td>
+        <td><%= link_to 'Edit', edit_map_path(map) %></td>
+        <td><%= link_to 'Destroy', map, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Map', new_map_path %>
+
+<!-- app/views/maps/show.html.erb -->
+
+<div id="map" class="show-map"></div>
+
+<script>
+  if (typeof map == "undefined") {
+    let map;
+    let marker;
+  }
+
+  function initMap() {
+    geocoder = new google.maps.Geocoder();
+
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: { lat: 35.6803997, lng: 139.7690174 },
+      zoom: 10,
+    });
+
+    marker = new google.maps.Marker({
+      position: { lat: 35.6803997, lng: 139.7690174 },
+      map: map,
+    });
+  }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['AIzaSyB7JXfKdyGbC5w6U1mZljK1ii619BA3mr0'] %>&libraries=places&callback=initMap" async defer></script>
+
