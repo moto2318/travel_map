@@ -31,29 +31,50 @@
 <%= link_to 'New Map', new_map_path %>
 
 <!-- app/views/maps/show.html.erb -->
+<%= render 'form', map: @map %>
 
 <div id="map" class="show-map"></div>
 
 <script>
-  if (typeof map == "undefined") {
-    let map;
-    let marker;
-  }
+var map;
 
-  function initMap() {
-    geocoder = new google.maps.Geocoder();
+function initMap() {
+  var center = {lat: 35.6895, lng: 139.6917}; // これは東京の緯度経度です。デフォルトの位置として設定しています。
 
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: { lat: 35.6803997, lng: 139.7690174 },
-      zoom: 10,
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: center,
+    zoom: 10
+  });
+
+  google.maps.event.addListener(map, 'click', function(event) {
+    placeMarker(event.latLng);
+  });
+}
+
+function placeMarker(location) {
+  var marker = new google.maps.Marker({
+    position: location,
+    map: map
+  });
+
+  // 緯度経度をhidden_fieldにセット
+  //調べること⇩
+document.getElementById('map_lat').value = location.lat();
+document.getElementById('map_lng').value = location.lng();
+
+
+    var infoWindow = new google.maps.InfoWindow({
+      
+      
+        content: 'aaaaa'
     });
 
-    marker = new google.maps.Marker({
-      position: { lat: 35.6803997, lng: 139.7690174 },
-      map: map,
+    marker.addListener('click', function() {
+        infoWindow.open(map, marker);
     });
-  }
+
+}
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['AIzaSyB7JXfKdyGbC5w6U1mZljK1ii619BA3mr0'] %>&libraries=places&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7JXfKdyGbC5w6U1mZljK1ii619BA3mr0&libraries=places&callback=initMap" async defer></script>
 

@@ -1,13 +1,20 @@
 class MapsController < ApplicationController
-  #before_action :set_map, only: %i[ show edit update destroy ]
-
+  before_action :set_map, only: %i[ show edit update destroy ]
+  
+  
+  def map
+    @maps = Map.all
+   
+  end
   # GET /maps or /maps.json
   def index
     @maps = Map.all
+     @map = Map.new
   end
 
   # GET /maps/1 or /maps/1.json
   def show
+    
   end
 
   # GET /maps/new

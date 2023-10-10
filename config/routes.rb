@@ -3,7 +3,10 @@ Rails.application.routes.draw do
     
   resources :pins
   resources :rails
-  resources :maps
+  resources :maps do 
+    get 'map', on: :collection
+ end
+ 
   devise_scope :customer do
     get '/customers/sign_out' => 'devise/sessions#destroy'
   end
@@ -14,6 +17,9 @@ Rails.application.routes.draw do
     get '/about' => 'homes#about'
     
     resources :tag
+    resources :post
+
+      get 'customers/my_page' => 'customers#show'
 
     
   end
