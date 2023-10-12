@@ -31,11 +31,12 @@
 <%= link_to 'New Map', new_map_path %>
 
 <!-- app/views/maps/show.html.erb -->
-<%= render 'form', map: @map %>
+
 
 <div id="map" class="show-map"></div>
 <div id="modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background-color:white; padding:20px; box-shadow:0 0 10px rgba(0,0,0,0.5);">
-    ここを編集する
+    <%= render 'form', map: @map %>
+
     <button onclick="closeModal()">Close</button>
 </div>
 
@@ -52,11 +53,44 @@
       center: center,
       zoom: 10
     });
+    
+    var maps = <%= @maps.to_json.html_safe %>;
+    maps.forEach(function(mapData) {
+        var latLng = new google.maps.LatLng(mapData.lat, mapData.lng);
+        
+        var marker = new google.maps.Marker({
+            position: latLng,
+            map: map
+        });
+    
+        // InfoWindowのコンテンツを設定
+        var infoWindowContent = `
+        <div class="custom-info">
+           <div class="custom-info-item name">${mapData.address}</div>
+           <div class="custom-info-item name">${mapData.title}</div>
+           <div class="custom-info-item name">${mapData.text}</div>
+        </div>
+                                 `;
+    
+        var infoWindow = new google.maps.InfoWindow({
+            content: infoWindowContent
+        });
+    
+        // マーカーのクリックイベントにリスナーを追加してInfoWindowを表示
+        marker.addListener('click', function() {
+            infoWindow.open(map, marker);
+        });
+    });
+    
+    
+    
     geocoder = new google.maps.Geocoder(); // Geocoder初期化
     google.maps.event.addListener(map, 'click', function(event) {
       placeMarker(event.latLng);
     });
+    
   }
+  
 
   function placeMarker(location) {
     var marker = new google.maps.Marker({
@@ -67,6 +101,7 @@
     geocoder.geocode({"location": location}, function(results, status) {
       if (status === "OK" && results[0]) {
         var address = results[0].formatted_address;
+        document.getElementById('address').value = address;
         var infoWindow = new google.maps.InfoWindow({
           content: `
           <div class="custom-info">
@@ -89,9 +124,15 @@
     });
 
     // 緯度経度をhidden_fieldにセット
-    document.getElementById('map_lat').value = location.lat();
-    document.getElementById('map_lng').value = location.lng();
+    document.getElementById('lat').value = location.lat();
+    document.getElementById('lng').value = location.lng();
+    
   }
+  
+
+  
+  
+  
 
   function openModal() {
     document.getElementById('modal').style.display = 'block';
@@ -100,6 +141,17 @@
   function closeModal() {
     document.getElementById('modal').style.display = 'none';
   }
+  
+  
+  
+  // function submitPost() {
+  //   // ここで投稿データをサーバーサイドに送信し、保存の処理を実装
+  //   var postTitle = document.getElementById('postTitle').value;
+  //   var postText = document.getElementById('postText').value;
+  //   // データをサーバーサイドに送信するための方法を実装
+  //   // 例えば、Ajaxリクエストを使用してサーバーサイドのエンドポイントにデータを送信
+  // }
+  google.maps.event.addDomListener(window, "load", initMap);
 </script>
 
 <!-- ピン編集フォーム -->
