@@ -9,12 +9,12 @@ class MapsController < ApplicationController
   # GET /maps or /maps.json
   def index
     @maps = Map.all
-     @map = Map.new
+    @map = Map.new
   end
 
   # GET /maps/1 or /maps/1.json
   def show
-    
+    @map = Map.find(params[:id])
   end
 
   # GET /maps/new
@@ -24,6 +24,7 @@ class MapsController < ApplicationController
 
   # GET /maps/1/edit
   def edit
+    @map = Map.find(params[:id])
   end
 
   # POST /maps or /maps.json

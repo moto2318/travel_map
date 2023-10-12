@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2023_10_09_131744) do
   create_table "maps", force: :cascade do |t|
     t.float "lat"
     t.float "lng"
+    t.string "title"
     t.string "text"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

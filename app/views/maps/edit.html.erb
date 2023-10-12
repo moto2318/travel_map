@@ -4,3 +4,15 @@
 
 <%= link_to 'Show', @map %> |
 <%= link_to 'Back', maps_path %>
+
+<%= form_with model: @map do |f|%>
+
+<h4>タイトル</h4>
+<%= f.text_filed :title %>
+
+<h4></h4>
+<%= f.text_area :text %>
+
+<%= f.submit '保存'%>
+
+<% end %>
