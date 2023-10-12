@@ -1,20 +1,19 @@
 class MapsController < ApplicationController
   before_action :set_map, only: %i[ show edit update destroy ]
-  
-  
+
+
   def map
     @maps = Map.all
-   
   end
   # GET /maps or /maps.json
   def index
     @maps = Map.all
-    @map = Map.new
   end
 
   # GET /maps/1 or /maps/1.json
   def show
-    @map = Map.find(params[:id])
+    # @post = Post.find(params[:id])
+    # render json: @post
   end
 
   # GET /maps/new
@@ -29,17 +28,8 @@ class MapsController < ApplicationController
 
   # POST /maps or /maps.json
   def create
-    @map = Map.new(map_params)
-
-    respond_to do |format|
-      if @map.save
-        format.html { redirect_to map_url(@map), notice: "Map was successfully created." }
-        format.json { render :show, status: :created, location: @map }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @map.errors, status: :unprocessable_entity }
-      end
-    end
+    @map = Map.create!(map_params)
+    redirect_to maps_path
   end
 
   # PATCH/PUT /maps/1 or /maps/1.json
@@ -73,6 +63,6 @@ class MapsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def map_params
-      params.require(:map).permit(:lat, :lng, :text)
+      params.permit(:lat, :lng, :text, :title, :address)
     end
 end

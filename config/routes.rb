@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
-    
-    
+
+
   resources :pins
   resources :rails
-  resources :maps do 
+  resources :maps do
     get 'map', on: :collection
  end
- 
+
   devise_scope :customer do
     get '/customers/sign_out' => 'devise/sessions#destroy'
   end
@@ -15,19 +15,20 @@ Rails.application.routes.draw do
   scope module: :public  do
     root to: 'homes#top'
     get '/about' => 'homes#about'
-    
-    resources :tag
+
+    resources :tags
     resources :post
+
 
       get 'customers/my_page' => 'customers#show'
 
-    
+
   end
 
 
   namespace :admin do
     root to: 'homes#top'
-    
+
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
