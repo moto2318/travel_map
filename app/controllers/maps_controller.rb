@@ -28,8 +28,12 @@ class MapsController < ApplicationController
 
   # POST /maps or /maps.json
   def create
-    @map = Map.create!(map_params)
-    redirect_to maps_path
+    @map = Map.create(map_params)
+    if @map.save
+      redirect_to maps_path, notice: 'Map was successfully created.'
+    elsif
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   # PATCH/PUT /maps/1 or /maps/1.json

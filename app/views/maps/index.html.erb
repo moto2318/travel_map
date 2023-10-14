@@ -53,44 +53,43 @@
       center: center,
       zoom: 10
     });
-    
+
     var maps = <%= @maps.to_json.html_safe %>;
     maps.forEach(function(mapData) {
         var latLng = new google.maps.LatLng(mapData.lat, mapData.lng);
-        
+
         var marker = new google.maps.Marker({
             position: latLng,
             map: map
         });
-    
+
         // InfoWindowのコンテンツを設定
         var infoWindowContent = `
         <div class="custom-info">
            <div class="custom-info-item name">${mapData.address}</div>
            <div class="custom-info-item name">${mapData.title}</div>
            <div class="custom-info-item name">${mapData.text}</div>
-        </div>
-                                 `;
-    
+        </div>`;
+
         var infoWindow = new google.maps.InfoWindow({
             content: infoWindowContent
         });
-    
+
         // マーカーのクリックイベントにリスナーを追加してInfoWindowを表示
         marker.addListener('click', function() {
             infoWindow.open(map, marker);
         });
     });
-    
-    
-    
+
+
+
     geocoder = new google.maps.Geocoder(); // Geocoder初期化
     google.maps.event.addListener(map, 'click', function(event) {
       placeMarker(event.latLng);
     });
-    
+
   }
-  
+
   function placeMarker(location) {
     var marker = new google.maps.Marker({
       position: location,
@@ -125,13 +124,21 @@
     // 緯度経度をhidden_fieldにセット
     document.getElementById('lat').value = location.lat();
     document.getElementById('lng').value = location.lng();
-    
+
+    markers.push(marker);
+  }
+
+
+  // マーカーを削除する関数
+  function deleteMarker(marker) {
+    marker.setMap(null); // マップ上から削除
+    var index = markers.indexOf(marker);
+    if (index > -1) {
+      markers.splice(index, 1); // 配列から削除
+    }
   }
   
 
-  
-  
-  
 
   function openModal() {
     document.getElementById('modal').style.display = 'block';
@@ -140,9 +147,9 @@
   function closeModal() {
     document.getElementById('modal').style.display = 'none';
   }
-  
-  
-  
+
+
+
   // function submitPost() {
   //   // ここで投稿データをサーバーサイドに送信し、保存の処理を実装
   //   var postTitle = document.getElementById('postTitle').value;
