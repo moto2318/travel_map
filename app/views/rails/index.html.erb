@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Rails</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>G</th>
+      <th>Scaffold</th>
+      <th>Map</th>
+      <th>Lat</th>
+      <th>Lng</th>
+      <th>Text</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rails.each do |rail| %>
+      <tr>
+        <td><%= rail.g %></td>
+        <td><%= rail.scaffold %></td>
+        <td><%= rail.map %></td>
+        <td><%= rail.lat %></td>
+        <td><%= rail.lng %></td>
+        <td><%= rail.text %></td>
+        <td><%= link_to 'Show', rail %></td>
+        <td><%= link_to 'Edit', edit_rail_path(rail) %></td>
+        <td><%= link_to 'Destroy', rail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rail', new_rail_path %>

@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  taitle: MyString
+  details: MyText
+  latitude: MyString
+  longitude: MyString
+  postal_code: MyString
+  state_province: MyString
+  city_town_village: MyString
+
+two:
+  taitle: MyString
+  details: MyText
+  latitude: MyString
+  longitude: MyString
+  postal_code: MyString
+  state_province: MyString
+  city_town_village: MyString

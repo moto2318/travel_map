@@ -81,6 +81,13 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    coffee-rails (5.0.0)
+      coffee-script (>= 2.2.0)
+      railties (>= 5.2.0)
+    coffee-script (2.4.1)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.12.2)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
     date (3.3.3)
@@ -91,6 +98,7 @@ GEM
       responders
       warden (~> 1.2.3)
     erubi (1.12.0)
+    execjs (2.9.1)
     ffi (1.16.2)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -212,6 +220,8 @@ GEM
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     semantic_range (3.0.0)
+    social-share-button (1.2.4)
+      coffee-rails
     spring (4.1.1)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
@@ -273,6 +283,7 @@ DEPENDENCIES
   rails_admin
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
+  social-share-button
   spring
   sqlite3 (~> 1.4)
   turbolinks (~> 5)
