@@ -1,0 +1,49 @@
+ <h1>Map Maps</h1>
+ <div id="map" class="map-maps"></div>
+
+ <script>
+  function initMap() {
+  　　　　// # 地図の表示初期値(東京)
+    let latlng = new google.maps.LatLng(35.6803997, 139.7690174);
+    let styles = [
+      {
+        featureType: "all",
+	stylers: [
+          { "saturation": -70 },
+          { "lightness": 0 },
+          // 練習用に地図のデザインを変更
+          { gamma: 0.6 } 
+        ]
+      }
+    ];
+
+  let map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 5.8,
+    // # 定義したデザインの適用
+    styles: styles,　
+    center: latlng
+  });
+  let transitLayer = new google.maps.TransitLayer();
+  // # 公共交通機関の情報を地図上に表示するための機能
+  transitLayer.setMap(map); 
+
+  <% @maps.each do |map| %> 
+    ( function(){
+      let markerLatLng = { lat: <%= map.lat %>, lng: <%= map.lng %> };
+      let marker = new google.maps.Marker({
+        position: markerLatLng,
+        map: map
+      });
+      // # 情報ウィンドウの定義
+      let infowindow = new google.maps.InfoWindow({　
+        position: markerLatLng,
+        content: "<a href='<%= map_path(map.id) %>' target='_blank'><%= map.text %></a>"　# 'target='_blank''リンクを新しいタブまたはウィンドウで開くための属性
+      });
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
+    })();
+  <% end %>
+  }
+ </script>
+ <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['AIzaSyB7JXfKdyGbC5w6U1mZljK1ii619BA3mr0'] %>&libraries=places&callback=initMap" async defer></script>

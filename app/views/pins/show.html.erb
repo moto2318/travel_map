@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @pin.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @pin.longitude %>
+</p>
+
+<p>
+  <strong>Postal code:</strong>
+  <%= @pin.postal_code %>
+</p>
+
+<p>
+  <strong>State province:</strong>
+  <%= @pin.state_province %>
+</p>
+
+<p>
+  <strong>City town village:</strong>
+  <%= @pin.city_town_village %>
+</p>
+
+<%= link_to 'Edit', edit_pin_path(@pin) %> |
+<%= link_to 'Back', pins_path %>
