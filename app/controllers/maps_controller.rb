@@ -12,7 +12,7 @@ class MapsController < ApplicationController
 
   # GET /maps/1 or /maps/1.json
   def show
-    # @post = Post.find(params[:id])
+     @map = Map.find(params[:id])
     # render json: @post
   end
 
@@ -26,15 +26,43 @@ class MapsController < ApplicationController
     @map = Map.find(params[:id])
   end
 
-  # POST /maps or /maps.json
+    # POST /maps or /maps.json
   def create
-    @map = Map.create(map_params)
-    if @map.save
-      redirect_to maps_path, notice: 'Map was successfully created.'
-    elsif
-      redirect_back(fallback_location: root_path)
+    @map = Map.new(map_params)
+    @map.customer_id = current_customer.id
+    unless params[:name] == ""
+      tag_list = params[:name].split(',')
+      if @map.save
+        @map.save_tags(tag_list)
+        redirect_to maps_path, notice:'投稿が成功しました'
+        redirect_to maps_path, notice: 'Map was successfully created.'
+      else
+        redirect_back(fallback_location: root_path)
+      end
+    else
+      if @map.save
+        redirect_to maps_path
+      else
+        redirect_back(fallback_location: root_path)
+      end
     end
   end
+
+
+  #タグの作成
+  # def create_tag
+  #   @post = Post.new(post_params)
+  #   @post.end_user_id = current_end_user.id
+  #   tag_list = params[:post][:name].split(',')
+  #   if @post.save
+  #     @post.save_tags(tag_list)
+  #     redirect_to maps_path, notice:'投稿が成功しました'
+  #   elsif
+  #     redirect_back(fallback_location: root_path)
+  #   end
+  # end
+
+
 
   # PATCH/PUT /maps/1 or /maps/1.json
   def update

@@ -18,7 +18,7 @@
   <div class="field">
     <%= form.hidden_field :lng %>
   </div>
-  
+
   <div class="field">
     <%= form.hidden_field :address %>
   </div>
@@ -32,6 +32,13 @@
     <%= form.label :text %>
     <%= form.text_area :text %>
   </div>
+  
+   <div class="field">
+    <%= form.label "タグ" %>
+    <%= form.text_field :name %>
+  </div>
+  
+  <button><%= link_to 'Destroy', @map, method: :delete, data: { confirm: 'Are you sure?' } %></button>
 
 
 

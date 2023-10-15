@@ -36,7 +36,7 @@
 <div id="map" class="show-map"></div>
 <div id="modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background-color:white; padding:20px; box-shadow:0 0 10px rgba(0,0,0,0.5);">
     <%= render 'form', map: @map %>
-
+    
     <button onclick="closeModal()">Close</button>
 </div>
 
@@ -66,13 +66,13 @@
         
         // InfoWindowのコンテンツを設定
         var infoWindowContent = `
-        <div class="custom-info">
-          <div class="custom-info-item name">${mapData.address}</div>
-          <div class="custom-info-item name">
-            <a href="maps/${mapData.id}">${mapData.title}</a>
-          </div>
-          
-        </div>`;
+          <div class="custom-info">
+              <div class="custom-info-item name">${mapData.address}</div>
+              <div class="custom-info-item name">
+                  <a href="/maps/${mapData.id}">${mapData.title}</a>
+              </div>
+          </div>`;
+
 
         var infoWindow = new google.maps.InfoWindow({
             content: infoWindowContent
@@ -98,7 +98,7 @@
     const style = window.getComputedStyle(target)
     const status = style.getPropertyValue('display') === "block"　//ディスプレイで表示したブロックに対応するためのコード群（上から３つまで参考）
     if (status) {
-      return;
+      return;                             //returnはこのコードが実行されている際にはreturn以下に書いてあるコードの効果を無効にする　＝ポップアップ作業中は地図にピンをさせなくなる
     }
     if (currentMarker != null) {
       currentMarker.setMap(null)
@@ -133,7 +133,7 @@
       }
     });
 
-    // 緯度経度をhidden_fieldにセット
+    // 緯度経度をhidden_fieldにセット、consoleは取得取得している緯度・経度を表示している
     console.log(location.lat())
     console.log(location.lng())
     document.getElementById('lat').value = location.lat();
@@ -143,14 +143,14 @@
   }
 
 
-  // マーカーを削除する関数
-  function deleteMarker(marker) {
-    marker.setMap(null); // マップ上から削除
-    var index = markers.indexOf(marker);
-    if (index > -1) {
-      markers.splice(index, 1); // 配列から削除
-    }
-  }
+  // // マーカーを削除する関数
+  // function deleteMarker(marker) {
+  //   marker.setMap(null); // マップ上から削除
+  //   var index = markers.indexOf(marker);
+  //   if (index > -1) {
+  //     markers.splice(index, 1); // 配列から削除
+  //   }
+  // }
   
 
 // ディスプレイのポップアップをブロックとして表示する
@@ -162,6 +162,8 @@
   function closeModal() {
     document.getElementById('modal').style.display = 'none';
   }
+  
+  
 
 
 

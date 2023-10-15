@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_10_13_165048) do
+ActiveRecord::Schema.define(version: 2023_10_15_044724) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2023_10_13_165048) do
   create_table "customers", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.boolean "is_deleted", null: false
+    t.boolean "is_deleted", default: false, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -34,7 +34,17 @@ ActiveRecord::Schema.define(version: 2023_10_13_165048) do
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
+  create_table "map_tags", force: :cascade do |t|
+    t.integer "map_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["map_id"], name: "index_map_tags_on_map_id"
+    t.index ["tag_id"], name: "index_map_tags_on_tag_id"
+  end
+
   create_table "maps", force: :cascade do |t|
+    t.integer "customer_id", null: false
     t.float "lat"
     t.float "lng"
     t.string "title"
@@ -42,6 +52,7 @@ ActiveRecord::Schema.define(version: 2023_10_13_165048) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "address"
+    t.index ["customer_id"], name: "index_maps_on_customer_id"
   end
 
   create_table "pins", force: :cascade do |t|
@@ -59,6 +70,7 @@ ActiveRecord::Schema.define(version: 2023_10_13_165048) do
     t.integer "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id", "tag_id"], name: "index_post_tags_on_post_id_and_tag_id", unique: true
     t.index ["post_id"], name: "index_post_tags_on_post_id"
     t.index ["tag_id"], name: "index_post_tags_on_tag_id"
   end
@@ -90,10 +102,12 @@ ActiveRecord::Schema.define(version: 2023_10_13_165048) do
 
   create_table "tags", force: :cascade do |t|
     t.integer "customer_id", null: false
-    t.text "tag_new"
+    t.text "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index "\"map_id\", \"tag_id\"", name: "index_tags_on_map_id_and_tag_id", unique: true
     t.index ["customer_id"], name: "index_tags_on_customer_id"
+    t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -108,6 +122,9 @@ ActiveRecord::Schema.define(version: 2023_10_13_165048) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "map_tags", "maps"
+  add_foreign_key "map_tags", "tags"
+  add_foreign_key "maps", "customers"
   add_foreign_key "post_tags", "posts"
   add_foreign_key "post_tags", "tags"
   add_foreign_key "posts", "customers"

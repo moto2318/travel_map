@@ -1,86 +1,10 @@
 <!--顧客のマイページと連動-->
 
-<p id="notice"><%= notice %></p>
+<h1>Map Details</h1>
 
-<p>
-  <strong>Lat:</strong>
-  <%= @map.lat %>
-</p>
+<p><strong>Lat:</strong> <%= map.lat %></p>
+<p><strong>Lng:</strong> <%= map.lng %></p>
+<p><strong>Text:</strong> <%= map.text %></p>
 
-<p>
-  <strong>Lng:</strong>
-  <%= @map.lng %>
-</p>
-
-<p>
-  <strong>Text:</strong>
-  <%= @map.text %>
-</p>
-
-<%= link_to 'Edit', edit_map_path(@map) %> |
 <%= link_to 'Back', maps_path %>
-
-<p id="notice"><%= notice %></p>
-
-<h1>Maps</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Lat</th>
-      <th>Lng</th>
-      <th>Text</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @maps.each do |map| %>
-      <tr>
-        <td><%= map.lat %></td>
-        <td><%= map.lng %></td>
-        <td><%= map.title%></td>
-        <td><%= map.text %></td>
-        <td><%= link_to 'Show', map %></td>
-        <td><%= link_to 'Edit', edit_map_path(map) %></td>
-        <td><%= link_to 'Destroy', map, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-    <!--SNSのリンク-->
-    <%= social_share_button_tag(@question.title) %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Map', new_map_path %>
-
-<!-- app/views/maps/show.html.erb -->
-
-<div id="map" class="show-map"></div>
-
-<script>
-  if (typeof map == "undefined") {
-    let map;
-    let marker;
-  }
-
-  function initMap() {
-    geocoder = new google.maps.Geocoder();
-// 地図の初期位置　＝　マーカーの位置
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: { lat: 35.6803997, lng: 139.7690174 },
-      zoom: 10,
-    });
-
-// マーカーの初期位置
-    marker = new google.maps.Marker({
-      position: { lat: 35.6803997, lng: 139.7690174 },
-      map: map,
-    });
-  }
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['AIzaSyB7JXfKdyGbC5w6U1mZljK1ii619BA3mr0'] %>&libraries=places&callback=initMap" async defer></script>
-
 
