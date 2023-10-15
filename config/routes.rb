@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :tags
     resources :post
 
-
+      # get 'serch_tag' => 'post_tag'
       get 'customers/my_page' => 'customers#show'
 
 
