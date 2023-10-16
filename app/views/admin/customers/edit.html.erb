@@ -1,2 +1,44 @@
-<h1>Admin::Customers#edit</h1>
-<p>Find me in app/views/admin/customers/edit.html.erb</p>
+<div class="container py-5">
+  <%= form_with model: @customer, url: admin_customer_path(@customer) do |f| %>
+  <div class="row mt-2 mb-3 offset-1 text-center">
+ <h4 class="p-2 mb-2 bg-light text-dark"><%= @customer.name %>さんの会員情報編集</h4>
+  </div>
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <table class="table table-list">
+        <tr>
+          <td>会員ID</td>
+          <td><%= @customer.id %></td>
+        </tr>
+        
+        <tr>
+          <td>ニックネーム</td>
+          <td><%= f.text_field :name %></td>
+        </tr>
+
+
+        <tr>
+          <td>メールアドレス</td>
+          <td><%= f.text_field :email %></td>
+        <tr>
+
+        <tr>
+          <td>会員ステータス</td>
+          <td>
+            <%= f.radio_button :is_deleted, false %>
+              有効
+            <%= f.radio_button :is_deleted, true %>
+              退会
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <button type="submit" class="btn btn-success">変更を保存</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <% end %>
+</div>
