@@ -13,7 +13,7 @@
   </thead>
 
   <tbody>
-    <% @maps.each do |map| %>
+    <% Map.all.each do |map| %>
       <tr>
         <td><%= map.lat %></td>
         <td><%= map.lng %></td>
@@ -36,7 +36,7 @@
 <div id="map" class="show-map"></div>
 <div id="modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background-color:white; padding:20px; box-shadow:0 0 10px rgba(0,0,0,0.5);">
     <%= render 'form', map: @map %>
-    
+
     <button onclick="closeModal()">Close</button>
 </div>
 
@@ -55,7 +55,7 @@
       zoom: 10
     });
 
-    var maps = <%= @maps.to_json.html_safe %>;
+    var maps = <%= Map.all.to_json.html_safe %>;
     maps.forEach(function(mapData) {
         var latLng = new google.maps.LatLng(mapData.lat, mapData.lng);
 
@@ -63,7 +63,7 @@
             position: latLng,
             map: map
         });
-        
+
         // InfoWindowのコンテンツを設定
         var infoWindowContent = `
           <div class="custom-info">
@@ -125,7 +125,7 @@
 
           // Add the event listener after the InfoWindow is opened
           google.maps.event.addListenerOnce(infoWindow, 'domready', function(){
-            document.getElementById('popupbutton').addEventListener('click', openModal);
+            document.getElementById('popupbutton').addEventListener('click', openModal(e));
           });
         });
       } else {
@@ -151,19 +151,21 @@
   //     markers.splice(index, 1); // 配列から削除
   //   }
   // }
-  
+
 
 // ディスプレイのポップアップをブロックとして表示する
-  function openModal() {
-    document.getElementById('modal').style.display = 'block';
+  function openModal(e) {
+    //document.getElementById('modal').style.display = 'block';
+    console.log(e);
+    e.target.style.display = 'block';
   }
 
 // ディスプレイのポップアップを非表示にする
   function closeModal() {
     document.getElementById('modal').style.display = 'none';
   }
-  
-  
+
+
 
 
 

@@ -7,7 +7,7 @@ class MapsController < ApplicationController
   end
   # GET /maps or /maps.json
   def index
-    @maps = current_customer.maps
+    @map = Map.first
   end
 
   # GET /maps/1 or /maps/1.json
@@ -33,9 +33,8 @@ class MapsController < ApplicationController
     unless params[:name] == ""
       tag_list = params[:name].split(',')
       if @map.save
-        @map.save_tags(tag_list)
-        redirect_to maps_path, notice:'投稿が成功しました'
-        redirect_to maps_path, notice: 'Map was successfully created.'
+        @map.save_tags(tag_list, current_customer.id)
+        redirect_to maps_path, notice: '投稿が成功しました'
       else
         redirect_back(fallback_location: root_path)
       end
@@ -91,11 +90,11 @@ class MapsController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
-    
+
     def map_params
       params.permit(:lat, :lng, :text, :title, :address)
     end
-    
+
     def map_update_params
       params.require(:map).permit(:text, :title)
     end

@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2023_10_15_044724) do
     t.integer "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["map_id", "tag_id"], name: "index_map_tags_on_map_id_and_tag_id", unique: true
     t.index ["map_id"], name: "index_map_tags_on_map_id"
     t.index ["tag_id"], name: "index_map_tags_on_tag_id"
   end
@@ -105,7 +106,6 @@ ActiveRecord::Schema.define(version: 2023_10_15_044724) do
     t.text "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index "\"map_id\", \"tag_id\"", name: "index_tags_on_map_id_and_tag_id", unique: true
     t.index ["customer_id"], name: "index_tags_on_customer_id"
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
