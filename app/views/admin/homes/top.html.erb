@@ -1,2 +1,15 @@
-<h1>Admin::Homes#top</h1>
-<p>Find me in app/views/admin/homes/top.html.erb</p>
+<table>
+  <thead>
+    <tr>
+        <th>ユーザー</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @customers.each do |order| %>
+      <tr>
+       <td><%= customer.name %></td>
+       <td><%= order.status_i18n %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
