@@ -7,7 +7,7 @@ class MapsController < ApplicationController
   end
   # GET /maps or /maps.json
   def index
-    @maps = Map.all
+    @maps = current_customer.maps
   end
 
   # GET /maps/1 or /maps/1.json
@@ -66,15 +66,12 @@ class MapsController < ApplicationController
 
   # PATCH/PUT /maps/1 or /maps/1.json
   def update
-    respond_to do |format|
-      if @map.update(map_params)
-        format.html { redirect_to map_url(@map), notice: "Map was successfully updated." }
-        format.json { render :show, status: :ok, location: @map }
+      if @map.update(map_update_params)
+        redirect_to @map
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @map.errors, status: :unprocessable_entity }
+        render :edit
       end
-    end
+
   end
 
   # DELETE /maps/1 or /maps/1.json
@@ -94,7 +91,12 @@ class MapsController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
+    
     def map_params
       params.permit(:lat, :lng, :text, :title, :address)
+    end
+    
+    def map_update_params
+      params.require(:map).permit(:text, :title)
     end
 end

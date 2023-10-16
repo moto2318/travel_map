@@ -2,7 +2,7 @@
     <h2>会員情報編集</h2>
 </div>
 
-<%= form_with model: @customer, url: customers_informaiton_path, method: :patch do |f| %>
+<%= form_with model: @customer do |f| %>
     <table>
         <tr>
             <td><%= f.label :name, "ニックネーム" %></td>
@@ -16,6 +16,6 @@
     <%= f.submit "編集内容を保存" %>
     <% end %>
     
-    <div>
-        <%= link_to "退会する", customers_confirm_path %>
-    </div>
+    <!--<div>-->
+    <!--    <%#= link_to "退会する", customers_confirm_path %>-->
+    <!--</div>-->
