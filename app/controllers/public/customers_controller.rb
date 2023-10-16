@@ -4,22 +4,19 @@ class Public::CustomersController < ApplicationController
     @coustomer = current_customer
     @lists = Map.all
   end
-
-
-  def show
-    @coustomer = current_customer
-    #@list = Map.find(params[:id])
+  
+  def mypage
+    @maps = current_customer.maps
   end
 
   def edit
-    @coustomer = current_customer
-    #@list = Map.find(params[:id])
+    @customer = current_customer
   end
 
   def update
      @customer = current_customer
     if @customer.update(customer_params)
-      redirect_to customers_my_page_path
+      redirect_to  mypage_customers_path
     else
       render :edit
     end

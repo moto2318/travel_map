@@ -15,13 +15,16 @@ Rails.application.routes.draw do
   scope module: :public  do
     root to: 'homes#top'
     get '/about' => 'homes#about'
-    resources :customers
+    resources :customers, only: [:index, :show, :edit, :update] do
+      collection do 
+        get :mypage
+      end
+    end
 
     resources :tags
     resources :post
 
       # get 'serch_tag' => 'post_tag'
-      get 'customers/my_page' => 'customers#index'
 
 
   end
@@ -29,7 +32,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'homes#top'
-    resources :customers, only: [:index, :edit, :update]
+    resources :customers, only: [:index, :show, :edit, :update]
 
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
