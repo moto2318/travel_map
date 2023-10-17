@@ -33,7 +33,7 @@ class MapsController < ApplicationController
     unless params[:name] == ""
       tag_list = params[:name].split(',')
       if @map.save
-        @map.save_tags(tag_list, current_customer.id)
+        @map.save_tags(tag_list)
         redirect_to maps_path, notice: '投稿が成功しました'
       else
         redirect_back(fallback_location: root_path)
