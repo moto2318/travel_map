@@ -7,7 +7,8 @@ class MapsController < ApplicationController
   end
   # GET /maps or /maps.json
   def index
-    @map = Map.first
+    @map = Map.new
+    @maps = current_customer.maps.select(:id, :address, :title, :lat, :lng, :text)
   end
 
   # GET /maps/1 or /maps/1.json
@@ -30,10 +31,10 @@ class MapsController < ApplicationController
   def create
     @map = Map.new(map_params)
     @map.customer_id = current_customer.id
-    unless params[:name] == ""
-      tag_list = params[:name].split(',')
+    unless params[:map][:name] == ""
+      tag_list = params[:map][:name].split(',')
       if @map.save
-        @map.save_tags(tag_list)
+        @map.save_tags(tag_list, current_customer.id)
         redirect_to maps_path, notice: '投稿が成功しました'
       else
         redirect_back(fallback_location: root_path)
@@ -92,7 +93,7 @@ class MapsController < ApplicationController
     # Only allow a list of trusted parameters through.
 
     def map_params
-      params.permit(:lat, :lng, :text, :title, :address)
+      params.require(:map).permit(:lat, :lng, :text, :title, :address)
     end
 
     def map_update_params

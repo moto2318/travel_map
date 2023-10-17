@@ -36,7 +36,6 @@
 <div id="map" class="show-map"></div>
 <div id="modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background-color:white; padding:20px; box-shadow:0 0 10px rgba(0,0,0,0.5);">
     <%= render 'form', map: @map %>
-
     <button onclick="closeModal()">Close</button>
 </div>
 
@@ -55,7 +54,7 @@
       zoom: 10
     });
 
-    var maps = <%= Map.all.to_json.html_safe %>;
+    var maps = <%= @maps.to_json.html_safe %>;
     maps.forEach(function(mapData) {
         var latLng = new google.maps.LatLng(mapData.lat, mapData.lng);
 
@@ -71,6 +70,7 @@
               <div class="custom-info-item name">
                   <a href="/maps/${mapData.id}">${mapData.title}</a>
               </div>
+              <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/maps/${mapData.id}">destory</a>
           </div>`;
 
         var infoWindow = new google.maps.InfoWindow({
@@ -93,9 +93,10 @@
   }
 
   function placeMarker(location) {
-    const target = document.getElementById('modal')
-    const style = window.getComputedStyle(target)
-    const status = style.getPropertyValue('display') === "block"　//ディスプレイで表示したブロックに対応するためのコード群（上から３つまで参考）
+    const target = document.getElementById('modal');
+    const style = window.getComputedStyle(target);
+    console.log(target);
+    const status = style.getPropertyValue('display') === "block";　//ディスプレイで表示したブロックに対応するためのコード群（上から３つまで参考）
     if (status) {
       return;                             //returnはこのコードが実行されている際にはreturn以下に書いてあるコードの効果を無効にする　＝ポップアップ作業中は地図にピンをさせなくなる
     }
@@ -110,7 +111,7 @@
     geocoder.geocode({"location": location}, function(results, status) {
       if (status === "OK" && results[0]) {
         var address = results[0].formatted_address;
-        document.getElementById('address').value = address;
+        document.getElementById('map_address').value = address;
         var infoWindow = new google.maps.InfoWindow({
           content: `
           <div class="custom-info">
@@ -121,10 +122,10 @@
         });
         currentMarker.addListener('click', function() {
           infoWindow.open(map, currentMarker);
-
+          console.log('here');
           // Add the event listener after the InfoWindow is opened
           google.maps.event.addListenerOnce(infoWindow, 'domready', function(){
-            document.getElementById('popupbutton').addEventListener('click', openModal(e));
+            document.getElementById('popupbutton').addEventListener('click', openModal());
           });
         });
       } else {
@@ -135,9 +136,8 @@
     // 緯度経度をhidden_fieldにセット、consoleは取得取得している緯度・経度を表示している
     console.log(location.lat())
     console.log(location.lng())
-    document.getElementById('lat').value = location.lat();
-    document.getElementById('lng').value = location.lng();
-
+    document.getElementById('map_lat').value = location.lat();
+    document.getElementById('map_lng').value = location.lng();
     //markers.push(marker);
   }
 
@@ -153,10 +153,9 @@
 
 
 // ディスプレイのポップアップをブロックとして表示する
-  function openModal(e) {
+  function openModal() {
     //document.getElementById('modal').style.display = 'block';
-    console.log(e);
-    e.target.style.display = 'block';
+    document.getElementById('modal').style.display = 'block';
   }
 
 // ディスプレイのポップアップを非表示にする

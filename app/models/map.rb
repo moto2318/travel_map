@@ -5,8 +5,8 @@ class Map < ApplicationRecord
 
   validates :title, presence: true
   validates :text, presence: true
-  
-  def save_tag(sent_tags)
+
+  def save_tags(sent_tags, customer_id)
   # タグが存在していれば、タグの名前を配列として全て取得
     current_tags = self.tags.pluck(:name) unless self.tags.nil?
     # 現在取得したタグから送られてきたタグを除いてoldtagとする
@@ -21,12 +21,12 @@ class Map < ApplicationRecord
 
     # 新しいタグを保存
     new_tags.each do |new|
-      new_post_tag = Tag.find_or_create_by(name: new)
+      new_post_tag = Tag.find_or_create_by(name: new, customer_id: customer_id)
       self.tags << new_post_tag
    end
   end
 
-  
+
 
   # def save_tags(tag_list, customer_id) #tagsはコントローラーに書いてあるtag.listのこと
   # # タグが存在していれば、タグの名前を配列として全て取得
