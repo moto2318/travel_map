@@ -16,8 +16,9 @@
         <div class="container">
         <!--<a class="navbar-brand p-3"> <#%= link_to image_tag("logo.jpg", size: "60x60"), root_path %></a>-->
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
+            <ul class="nav nav-pills">
               <% if admin_signed_in? %>
+
 
                 <li class="nav-item">
                  <%= link_to "顧客一覧", admin_customers_path, class: "btn btn-outline-dark mr-3 ml-3" %>
