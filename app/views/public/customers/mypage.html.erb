@@ -1,39 +1,41 @@
-<h2>マイページ</h2>
-<div class="row">
-<h3>
-    <strong>登録情報</strong>
-</h3>
+<tbody class="container">
+    <h2>マイページ</h2>
+    <div class="row">
+    <h3>
+        <strong>登録情報</strong>
+    </h3>
+    
+    <div>
+        <%= link_to "編集する", edit_customer_path(current_customer) %>
+    </div>
+    
+    <table>
+        <tr>
+            <td>ニックネーム</td>
+            <td><%= current_customer.name %></td>
+        </tr>
+        <tr>
+            <td>メールアドレス</td>
+            <td><%= current_customer.email %></td>
+        </tr>
+    </table>
+    
+    <h1>投稿一覧</h1>
+    
+    <% @maps.each do |map| %>
+    
+      <p>タイトル</p>
+      <span><%= link_to map.title, map_path(map) %></span>
+    
+      <p>詳細</p>
+      <span><%= map.text %></span>
+    
+        <p>住所</p>
+      <span><%= map.address %></span>
+    <% end %>
+    </div>
+</tbody>
 
-<div>
-    <%= link_to "編集する", edit_customer_path(current_customer) %>
-</div>
-
-
-
-<table>
-    <tr>
-        <td>ニックネーム</td>
-        <td><%= current_customer.name %></td>
-    </tr>
-    <tr>
-        <td>メールアドレス</td>
-        <td><%= current_customer.email %></td>
-    </tr>
-</table>
-
-<h1>投稿一覧</h1>
-
-<% @maps.each do |map| %>
-
-  <p>タイトル</p>
-  <span><%= link_to map.title, map_path(map) %></span>
-
-  <p>詳細</p>
-  <span><%= map.text %></span>
-
-    <p>住所</p>
-  <span><%= map.address %></span>
-<% end %>
-
-
-</div>
+<footer>
+    
+</footer>

@@ -30,6 +30,8 @@
             <% elsif customer_signed_in? %>
               <p class= "">ようこそ、<%= current_customer.name %>さん！</p>
 
+              <%= render 'public/customers/search'%>
+
               <li class="nav-item">
                <%= link_to "マイページ", mypage_customers_path, class: "btn btn-outline-dark mr-3 ml-3" %>
               </li>
