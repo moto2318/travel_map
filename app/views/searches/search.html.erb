@@ -1,9 +1,12 @@
-<table class="table table-hover table-inverse">
-  <!--検索対象モデルがUserの時 -->
-
-    <h2>Maps search for "<%= @word %>"</h2>
-    <% @maps.each do |map| %>
-      <%= map.title %>
-    <% end %>
-
-</table>
+<div class="container">
+      <table class="table table-hover table-inverse">
+        <!--検索対象モデルがUserの時 -->
+  <div class="row">
+          <h2>Maps search for "<%= @word %>"</h2>
+          <% @maps.each do |map| %>
+            <%= map.title %>
+          <% end %>
+      
+      </table>
+  </div>
+</div>
