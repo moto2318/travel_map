@@ -26,6 +26,12 @@ class Map < ApplicationRecord
    end
   end
 
+# 検索方法分岐
+  def self.looks(word)
+      @map = Map.where("title LIKE?","%#{word}%")
+  end
+
+
 
 
   # def save_tags(tag_list, customer_id) #tagsはコントローラーに書いてあるtag.listのこと

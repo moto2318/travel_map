@@ -13,7 +13,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
 
-
+  get "search" => "searches#search"
   resources :pins
   resources :rails
   resources :maps do
