@@ -1,189 +1,150 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <!-- app/views/maps/show.html.erb -->
 
-<h1>Maps</h1>
+  <div class="row">
+    <div id="map" class="show-map"></div>
+      <div id="modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background-color:white; padding:20px; box-shadow:0 0 10px rgba(0,0,0,0.5);">
+          <%= render 'form', map: @map %>
+          <button onclick="closeModal()">Close</button>
+      </div>
+  <!--<div class="col-md-3">-->
+  <!--  <h1>Tag List</h1>-->
+  <!--  <ul>-->
+  <!--    <#% @tags.each do |tag| %>-->
+  <!--      <li><#%= tag %></li>-->
+  <!--    <#% end %>-->
+  <!--  </ul>-->
+  <!--</div>-->
 
-<table>
-  <thead>
-    <tr>
-      <th>Lat</th>
-      <th>Lng</th>
-      <th>Text</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <div class="col-md-9">
 
-  <!--<tbody>-->
-  <!--  <#% Map.all.each do |map| %>-->
-  <!--    <tr>-->
-  <!--      <td><%#= map.lat %></td>-->
-  <!--      <td><%#= map.lng %></td>-->
-  <!--      <td><%#= map.text %></td>-->
-  <!--      <td><%#= link_to 'Show', map %></td>-->
-  <!--      <td><%#= link_to 'Edit', edit_map_path(map) %></td>-->
-  <!--      <td><%#= link_to 'Destroy', map, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
-  <!--    </tr>-->
-  <!--  <#% end %>-->
-  <!--</tbody>-->
-</table>
+      <script>
+        var map;
+        var geocoder; // Geocoder
+        var currentMarker;
+        var taggedPosts = <%= @tagged_posts_info.to_json.html_safe %>;
 
-<br>
-
-<%= link_to 'New Map', new_map_path %>
-
-<!-- app/views/maps/show.html.erb -->
-
-
-<div id="map" class="show-map"></div>
-<div id="modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background-color:white; padding:20px; box-shadow:0 0 10px rgba(0,0,0,0.5);">
-    <%= render 'form', map: @map %>
-    <button onclick="closeModal()">Close</button>
-</div>
-
-<script>
-  var map;
-  var geocoder; // Geocoder
-  var currentMarker;
-
-  function initMap() {
-    var center = {
-      lat: 35.6895,
-      lng: 139.6917
-    }; // 東京の緯度経度
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: center,
-      zoom: 10
-    });
-
-    var maps = <%= @maps.to_json.html_safe %>;
-    maps.forEach(function(mapData) {
-        var latLng = new google.maps.LatLng(mapData.lat, mapData.lng);
-
-        var marker = new google.maps.Marker({
-            position: latLng,
-            map: map
-        });
-
-        // InfoWindowのコンテンツを設定
-        var infoWindowContent = `
-          <div class="custom-info">
-              <div class="custom-info-item name">${mapData.address}</div>
-              <div class="custom-info-item name">
-                  <a href="/maps/${mapData.id}">${mapData.title}</a>
-              </div>
-              <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/maps/${mapData.id}">destory</a>
-          </div>`;
-
-        var infoWindow = new google.maps.InfoWindow({
-            content: infoWindowContent
-        });
-
-        // マーカーのクリックイベントにリスナーを追加してInfoWindowを表示
-        marker.addListener('click', function() {
-            infoWindow.open(map, marker);
-        });
-    });
-
-
-
-    geocoder = new google.maps.Geocoder(); // Geocoder初期化
-    google.maps.event.addListener(map, 'click', function(event) {
-      placeMarker(event.latLng);
-    });
-
-  }
-
-  function placeMarker(location) {
-    const target = document.getElementById('modal');
-    const style = window.getComputedStyle(target);
-    console.log(target);
-    const status = style.getPropertyValue('display') === "block";　//ディスプレイで表示したブロックに対応するためのコード群（上から３つまで参考）
-    if (status) {
-      return;                             //returnはこのコードが実行されている際にはreturn以下に書いてあるコードの効果を無効にする　＝ポップアップ作業中は地図にピンをさせなくなる
-    }
-    if (currentMarker != null) {
-      currentMarker.setMap(null)
-    }
-    currentMarker = new google.maps.Marker({
-      position: location,
-      map: map
-    });
-
-    geocoder.geocode({"location": location}, function(results, status) {
-      if (status === "OK" && results[0]) {
-        var address = results[0].formatted_address;
-        document.getElementById('map_address').value = address;
-        var infoWindow = new google.maps.InfoWindow({
-          content: `
-          <div class="custom-info">
-            <div class="custom-info-item name">${address}</div>
-          </div>
-          <button id="popupbutton">open!</button>
-          `
-        });
-        currentMarker.addListener('click', function() {
-          infoWindow.open(map, currentMarker);
-          console.log('here');
-          // Add the event listener after the InfoWindow is opened
-          google.maps.event.addListenerOnce(infoWindow, 'domready', function(){
-            document.getElementById('popupbutton').addEventListener('click', openModal());
+        function initMap() {
+          var center = {
+            lat: 35.6895,
+            lng: 139.6917
+          }; // 東京の緯度経度
+          map = new google.maps.Map(document.getElementById('map'), {
+            center: center,
+            zoom: 10
           });
-        });
-      } else {
-        alert("Geocode was not successful for the following reason:" + status);
-      }
-    });
 
-    // 緯度経度をhidden_fieldにセット、consoleは取得取得している緯度・経度を表示している
-    console.log(location.lat())
-    console.log(location.lng())
-    document.getElementById('map_lat').value = location.lat();
-    document.getElementById('map_lng').value = location.lng();
-    //markers.push(marker);
-  }
+          var maps = <%= @maps.to_json.html_safe %>;
+          maps.forEach(function(mapData) {
+              var latLng = new google.maps.LatLng(mapData.lat, mapData.lng);
+
+              var marker = new google.maps.Marker({
+                  position: latLng,
+                  map: map
+              });
+
+              // InfoWindowのコンテンツを設定
+              var infoWindowContent = `
+                <div class="custom-info">
+                    <div class="custom-info-item name">${mapData.address}</div>
+                    <div class="custom-info-item name">
+                        <a href="/maps/${mapData.id}">${mapData.title}</a>
+                    </div>
+                    <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/maps/${mapData.id}">destory</a>
+                </div>`;
+
+              var infoWindow = new google.maps.InfoWindow({
+                  content: infoWindowContent
+              });
+
+              // マーカーのクリックイベントにリスナーを追加してInfoWindowを表示
+              marker.addListener('click', function() {
+                  infoWindow.open(map, marker);
+              });
+          });
+
+          geocoder = new google.maps.Geocoder(); // Geocoder初期化
+          google.maps.event.addListener(map, 'click', function(event) {
+            placeMarker(event.latLng);
+          });
+
+        }
+
+        function placeMarker(location) {
+          const target = document.getElementById('modal');
+          const style = window.getComputedStyle(target);
+          console.log(target);
+          const status = style.getPropertyValue('display') === "block";　//ディスプレイで表示したブロックに対応するためのコード群（上から３つまで参考）
+          if (status) {
+            return;                             //returnはこのコードが実行されている際にはreturn以下に書いてあるコードの効果を無効にする　＝ポップアップ作業中は地図にピンをさせなくなる
+          }
+          if (currentMarker != null) {
+            currentMarker.setMap(null)
+          }
+          currentMarker = new google.maps.Marker({
+            position: location,
+            map: map
+          });
+
+          geocoder.geocode({"location": location}, function(results, status) {
+            if (status === "OK" && results[0]) {
+              var address = results[0].formatted_address;
+              document.getElementById('map_address').value = address;
+              var infoWindow = new google.maps.InfoWindow({
+                content: `
+                <div class="custom-info">
+                  <div class="custom-info-item name">${address}</div>
+                </div>
+                <button id="popupbutton">open!</button>
+                `
+              });
+              currentMarker.addListener('click', function() {
+                infoWindow.open(map, currentMarker);
+                console.log('here');
+                // Add the event listener after the InfoWindow is opened
+                google.maps.event.addListenerOnce(infoWindow, 'domready', function(){
+                  document.getElementById('popupbutton').addEventListener('click', openModal);
+                  // click -> openModal()
+                });
+              });
+            } else {
+              alert("Geocode was not successful for the following reason:" + status);
+            }
+          });
+
+          // タグの絞り込み機能
+          // taggedPosts.forEach(function(mapData) {
+          //   var latLng = new google.maps.LatLng(mapData.lat, mapData.lng);
+
+          //   var marker = new google.maps.Marker({
+          //     position: latLng,
+          //     map: map
+          //   });
+
+          // 緯度経度をhidden_fieldにセット、consoleは取得取得している緯度・経度を表示している
+          console.log(location.lat())
+          console.log(location.lng())
+          document.getElementById('map_lat').value = location.lat();
+          document.getElementById('map_lng').value = location.lng();
+          //markers.push(marker);
+        }
 
 
-  // // マーカーを削除する関数
-  // function deleteMarker(marker) {
-  //   marker.setMap(null); // マップ上から削除
-  //   var index = markers.indexOf(marker);
-  //   if (index > -1) {
-  //     markers.splice(index, 1); // 配列から削除
-  //   }
-  // }
+      // ディスプレイのポップアップをブロックとして表示する
+        function openModal() {
+          //document.getElementById('modal').style.display = 'block';
+          console.log("確認")
+          document.getElementById('modal').style.display = 'block';
+        }
 
+      // ディスプレイのポップアップを非表示にする
+        function closeModal() {
+          document.getElementById('modal').style.display = 'none';
+        }
 
-// ディスプレイのポップアップをブロックとして表示する
-  function openModal() {
-    //document.getElementById('modal').style.display = 'block';
-    document.getElementById('modal').style.display = 'block';
-  }
-
-// ディスプレイのポップアップを非表示にする
-  function closeModal() {
-    document.getElementById('modal').style.display = 'none';
-  }
-
-
-
-
-
-  // function submitPost() {
-  //   // ここで投稿データをサーバーサイドに送信し、保存の処理を実装
-  //   var postTitle = document.getElementById('postTitle').value;
-  //   var postText = document.getElementById('postText').value;
-  //   // データをサーバーサイドに送信するための方法を実装
-  //   // 例えば、Ajaxリクエストを使用してサーバーサイドのエンドポイントにデータを送信
-  // }
-  //google.maps.event.addDomListener(window, "load", initMap);
-</script>
-
-<!-- ピン編集フォーム -->
-<!--<div id="edit-pin-form" style="display: none;">-->
-<!--  <%#= link_to "show", edit_map_path%>-->
-<!--</div>-->
-
-<!-- ピン削除ボタン -->
-<!--<button id="delete-pin-button">削除</button>-->
-
-<!-- ここでGoogle Maps JavaScript APIを読み込み -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7JXfKdyGbC5w6U1mZljK1ii619BA3mr0&libraries=places&callback=initMap" async defer></script>
+      </script>
+      <!-- ここでGoogle Maps JavaScript APIを読み込み -->
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7JXfKdyGbC5w6U1mZljK1ii619BA3mr0&libraries=places&callback=initMap" async defer></script>
+    </div>
+  </div>
+</div>

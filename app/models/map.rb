@@ -25,6 +25,10 @@ class Map < ApplicationRecord
       self.tags << new_post_tag
    end
   end
+  
+  scope :has_tag_name_like, -> tag_name {
+    joins(:tags).merge(Tags.name_like tag_name)
+  }
 
 # 検索方法分岐
   def self.looks(word)

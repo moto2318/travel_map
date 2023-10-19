@@ -1,12 +1,26 @@
 class MapsController < ApplicationController
   before_action :set_map, only: %i[ show edit update destroy ]
+  
+  def show_tagged_posts
+    @tag = params[:tag]
+    @tagged_posts = Map.where(tag: @tag)
 
-
+    # タグに関連する投稿の情報を収集
+    @tagged_posts_info = @tagged_posts.map do |post|
+      {
+        lat: post.lat,
+        lng: post.lng,
+        text: post.text,
+      }
+    end
+  end
+  
   def map
     @maps = Map.all
   end
   # GET /maps or /maps.json
   def index
+    @tags = Map.pluck(:tag).uniq # データベース内の全てのタグを取得
     @map = Map.new
     @maps = current_customer.maps.select(:id, :address, :title, :lat, :lng, :text)
   end
