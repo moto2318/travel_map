@@ -18,6 +18,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   resources :rails
   resources :maps do
     get 'map', on: :collection
+    get '/maps', to: 'maps#index'
  end
 
   devise_scope :customer do
