@@ -1,7 +1,5 @@
-<div class="container">
+<div class="containermb-2">
   <!-- app/views/maps/show.html.erb -->
-
-  <div class="row">
     <div id="map" class="show-map"></div>
       <div id="modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background-color:white; padding:20px; box-shadow:0 0 10px rgba(0,0,0,0.5);">
           <%= render 'form', map: @map %>
@@ -15,8 +13,6 @@
   <!--    <#% end %>-->
   <!--  </ul>-->
   <!--</div>-->
-
-    <div class="col-md-9">
 
       <script>
         var map;
@@ -145,6 +141,4 @@
       </script>
       <!-- ここでGoogle Maps JavaScript APIを読み込み -->
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7JXfKdyGbC5w6U1mZljK1ii619BA3mr0&libraries=places&callback=initMap" async defer></script>
-    </div>
-  </div>
 </div>

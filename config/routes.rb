@@ -13,6 +13,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
 
+
   get "search" => "searches#search"
   resources :pins
   resources :rails
@@ -24,6 +25,10 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   devise_scope :customer do
 
     get '/customers/sign_out' => 'devise/sessions#destroy'
+  end
+  # ゲストログイン
+  devise_scope :end_user do
+    post 'end_users/guest_sign_in', to: 'public/sessions#guest_sign_in'
   end
 
 
