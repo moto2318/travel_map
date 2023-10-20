@@ -1,13 +1,13 @@
 <!--顧客のマイページと連動-->
-
+<div container>
+  <div class="row">
 <h1>Map Details</h1>
 
-<p><strong>Lat:</strong> <%= @map.lat %></p>
-<p><strong>Lng:</strong> <%= @map.lng %></p>
-<p><strong>title:</strong> <%= @map.title %></p>
-<p><strong>Text:</strong> <%= @map.text %></p>
+<p><strong>住所:</strong> <%= @map.address %></p>
+<p><strong>見出し:</strong> <%= @map.title %></p>
+<p><strong>説明:</strong> <%= @map.text %></p>
 <p>
-  <strong>Tags:</strong>
+  <table>Tags:</table>
   <% @map.tags.each do |tag| %>
   <ul style="list-style:none;">
     <li style="display:inline;padding:8px 16px;">#<%= link_to tag.name, root_path %></li>
@@ -21,4 +21,10 @@
 
 <a class="twitter-share-button"
   href="https://twitter.com/intent/tweet?text=<%= @map.title %>" target="_blank" rel="noopener">
-Tweet</a>
+    Tweet</a>
+  </div>
+  
+  <div class="row">
+    
+  </div>
+</div>
