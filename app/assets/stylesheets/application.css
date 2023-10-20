@@ -13,12 +13,18 @@
  *= require_tree .
  *= require_self
  */
-  @import "social-share-button"; 
-  
+  @import "social-share-button";
+
   .show-map {
   height: 80vh;
   width: 90%;
   margin: 0 auto;
  }
- 
- 
+
+ .u-black-bg {
+    background-color: #000; /* お好みの色に置き換えてください */
+    color: #fff; /* 背景色とは対照的なテキストの色 */
+  }
+
+
+
