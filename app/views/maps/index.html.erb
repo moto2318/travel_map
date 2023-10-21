@@ -5,20 +5,48 @@
           <%= render 'form', map: @map %>
           <button onclick="closeModal()">Close</button>
       </div>
-  <!--<div class="col-md-3">-->
-  <!--  <h1>Tag List</h1>-->
-  <!--  <ul>-->
-  <!--    <#% @tags.each do |tag| %>-->
-  <!--      <li><#%= tag %></li>-->
-  <!--    <#% end %>-->
-  <!--  </ul>-->
-  <!--</div>-->
+      
+      <div class="search_map_container">
+        <%# 検索したい住所や場所を入力するテキストボックス %>
+        <input id="search_address" type="textbox" value="">
+        <%# 処理を行うボタン %>
+        <input id="search_address_button", type="button" value="検索" onclick="codeAddress()">
+        <div>
+          <%# 住所を表示する %>
+          <div id="result_address">住所が表示されます</div>
+        </div>
+        <%# 地図を表示する %>
+        <div id='search_map'></div>
+      </div>
 
       <script>
         var map;
         var geocoder; // Geocoder
         var currentMarker;
         var taggedPosts = <%= @tagged_posts_info.to_json.html_safe %>;
+        
+        <%# ページ呼出し時の処理 %>
+        function initMap(){
+          geocoder = new google.maps.Geocoder()
+          <%# 表示住所を取得 %>
+          let putAddress = document.getElementById('institution_mapping_address').textContent;
+          geocoder.geocode( { 'address': putAddress}, function(results, status) {
+            if (status == 'OK') {
+              <%# 表示場所にマップを表示 %>
+              map = new google.maps.Map(document.getElementById('institution_map'), {
+              zoom: 17,
+              });
+              map.setCenter(results[0].geometry.location);
+              <%# マップにマーカーを表示 %>
+              var marker = new google.maps.Marker({
+                  map: map,
+                  position: results[0].geometry.location
+              });
+            } else {
+              alert('該当する結果がありませんでした：' + status);
+            }
+          });
+        }
 
         function initMap() {
           var center = {
