@@ -2,9 +2,9 @@
 
 class Public::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-  
+
   def guest_sign_in
-    end_user = EndUser.guest
+    end_user = Customer.guest
     sign_in end_user
     redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
   end
@@ -29,7 +29,7 @@ class Public::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
-  
+
 protected
 def customer_state
     @customer = Customer.find_by(email: params[:customer][:email])
@@ -37,5 +37,5 @@ def customer_state
   if @customer.valid_password?(params[:customer][:password])
   end
 end
-  
+
 end

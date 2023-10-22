@@ -14,6 +14,12 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 }
 
 
+devise_for :end_users,skip: [:passwords], controllers: {
+  registrations: "public/registrations",
+  sessions: 'public/sessions'
+}
+
+
   get "search" => "searches#search"
   resources :pins
   resources :rails
@@ -26,15 +32,18 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
     get '/customers/sign_out' => 'devise/sessions#destroy'
   end
-  # ゲストログイン
+
   devise_scope :end_user do
     post 'end_users/guest_sign_in', to: 'public/sessions#guest_sign_in'
   end
 
 
+
   scope module: :public  do
     root to: 'homes#top'
     get '/about' => 'homes#about'
+    # ゲストログイン
+
     resources :customers, only: [:index, :show, :edit, :update] do
       collection do
         get :mypage
