@@ -57,7 +57,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 gem 'rails_admin'#管理者側の機能
-gem 'social-share-button'#SNSへの投稿リンク
 
 #環境変数の管理（デプロイ用）
 gem 'dotenv-rails'
