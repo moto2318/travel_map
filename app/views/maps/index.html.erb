@@ -6,6 +6,7 @@
           <button onclick="closeModal()">Close</button>
       </div>
 
+      <table>
       <div class="search_map_container">
         <%# 検索したい住所や場所を入力するテキストボックス %>
         <input id="search_address" type="textbox" value="">
@@ -18,6 +19,16 @@
         <%# 地図を表示する %>
         <div id='search_map'></div>
       </div>
+      <div class="books-container">
+        <% @tags.each do |tag| %>
+          <div class="">
+            <%= @tag %>
+          </div>
+          
+        <% end %>
+      </div>
+
+      </table>
 
       <script>
         var map;
