@@ -8,7 +8,7 @@
     <% @customers.each do |customer| %>
       <tr>
        <td><%=customer.name %></td>
-       <td><%= link_to edit_admin_customer_path%>編集</td>
+       <td><%= link_to edit_admin_customer_path(customer.id)%>編集</td>
       </tr>
     <% end %>
   </tbody>

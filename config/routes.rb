@@ -63,9 +63,8 @@ devise_for :end_users,skip: [:passwords], controllers: {
 
 
   namespace :admin do
-    root to: 'homes#top'
+    root to: 'customers#index'
     resources :customers, only: [:index, :show, :edit, :update]
-
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
