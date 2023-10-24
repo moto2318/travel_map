@@ -21,7 +21,7 @@ class Map < ApplicationRecord
 
     # 新しいタグを保存
     new_tags.each do |new|
-      new_post_tag = Tag.find_or_create_by(name: new, customer_id: customer_id)
+      new_post_tag = Tag.find_or_create_by(name: new)
       self.tags << new_post_tag
    end
   end

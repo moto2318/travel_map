@@ -42,13 +42,16 @@ devise_for :end_users,skip: [:passwords], controllers: {
   scope module: :public  do
     root to: 'homes#top'
     get '/about' => 'homes#about'
-    # ゲストログイン
+
 
     resources :customers, only: [:index, :show, :edit, :update] do
       collection do
         get :mypage
       end
+    get 'confirm' => 'customers#confirm'
+    patch 'withdrawal' => 'customers#withdrawal'
     end
+
 
     resources :tags
     resources :post
