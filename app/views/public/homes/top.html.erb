@@ -1,32 +1,42 @@
 <div class="container">
   <div class="row no-gutters">
-    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto text-center shadow-lg rounded px-0 my-5">
-      <h5 class="text-dark bg-light py-4 mb-0">マイページ</h5>
-      <div class="form-body p-4">
-        <div class="mx-auto text-center">
-          <strong>登録情報</strong>
-            <td>ニックネーム</td>
+     <div class="col-lg-4" style="background-color: orange;">
+
+          <table>登録情報</table>
+          <tr>
+            <th>ニックネーム</th>:
             <td><%= current_customer.name %></td>
-            <td>メールアドレス</td>
+          </tr>
+          <br>
+          <tr>
+            <th>メールアドレス</th>:
             <td><%= current_customer.email %></td>
+          </tr>
             <div class="btn">
               <%= link_to "編集する", edit_customer_path(current_customer) %>
             </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
 
 <div class="container">
   <div class="row">
-    <div class="col-md-5 col-sm-10 mx-2  text-center shadow-lg rounded px-0 my-5">
-      <h5 class="text-dark bg-light py-4 mb-0"></h5>
+    <div class="col-lg-8">
+      <div class="table table-striped text-dark bg-light py-4 mb-0">投稿一覧</div>
+        <p>ポップアップでのタイトル一覧機能は、旅行の思い出やお気に入りスポットを整理しやすくするための便利なツールです。この機能を使用すると、追加した場所ごとにタイトルを簡単に一覧表示できます。これにより、あなたのマップ上でどの場所にどんな思い出があるのかを素早く確認でき、特別な場所や体験に簡単にアクセスできます。さらに、タイトル欄にはその場所への思い出や理由を記入できるため、旅の思い出を豊かに共有し、簡単に振り返ることができます。この機能は、あなたの旅行プランをより楽しく、思い出深いものにするのに役立ちます。</p>
+
+    </div>
+
+      <h5 class="table table-striped text-dark bg-light py-4 mb-0">マップの役割とできること</h5>
       <div class="form-body p-4">
-        <p>一覧</p>
-        一覧の内容
-        <p>マップ</p>
-        マップの役割・できること
+        <table class="table table-striped"></table>
+          <li>マーカー設置機能</li>
+            <p>この地図サイトの最も目立つ機能の一つが、マーカー設置機能です。これを使えば、地図上にカスタムマーカーを設置できます。行った場所や行きたい場所を指し示し、それぞれの場所を視覚的に区別できます。これにより、あなたの冒険やプランが一目でわかり、整理がしやすくなります。</p>
+            <btn class="btn"><%= link_to maps_path %></btn>
+          <li>ポップアップ機能</li>
+            <p>各マーカーには、ポップアップ機能が付いています。これは、その場所がなぜお気に入りなのかを詳細に記入できるスペースです。思い出、感想、おすすめのメニュー、友達との楽しいエピソードなど、あなたの思い出をマーカーに関連付けて保存できます。後で振り返ると、その場所が特別な理由で溢れていることに気づくかもしれません。</p>
+          <li> 住所検索機能</li>
+            <p>住所を覚える必要はもうありません。地図サイト内で直接住所を検索できます。どの場所でも、瞬時にその場所を探し出すことができます。これにより、新しい場所へのナビゲーションがスムーズになります。また、新たな場所を見つけたり友達と共有するのも簡単です。</p>
       </div>
     </div>
   </div>

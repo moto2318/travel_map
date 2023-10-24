@@ -5,10 +5,10 @@
     </tr>
   </thead>
   <tbody>
-    <% @customers.each do |order| %>
+    <% @customers.each do |customer| %>
       <tr>
-       <td><%= customer.name %></td>
-       
+       <td><%=link_to customer.name %></td>
+
       </tr>
     <% end %>
   </tbody>
