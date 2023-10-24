@@ -41,6 +41,8 @@ class MapsController < ApplicationController
   # GET /maps/1/edit
   def edit
     @map = Map.find(params[:id])
+    @tags = Tag.all
+    @tag = params[:tag]
   end
 
     # POST /maps or /maps.json
