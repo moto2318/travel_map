@@ -12,6 +12,7 @@
  *= require_tree .
  *= require_self
  */
+ 
 
   .show-map {
   height: 80vh;
@@ -20,8 +21,8 @@
  }
 
  .u-black-bg {
-    background-color: #000; /* お好みの色に置き換えてください */
-    color: #fff; /* 背景色とは対照的なテキストの色 */
+    background-color: #000; 
+    color: #fff; 
   }
 
 
