@@ -71,6 +71,9 @@ class MapsController < ApplicationController
   # PATCH/PUT /maps/1 or /maps/1.json
   def update
       if @map.update(map_update_params)
+
+        tag_list = params[:map][:name].split(',')
+        @map.save_tags(tag_list)
         redirect_to @map
       else
         render :edit

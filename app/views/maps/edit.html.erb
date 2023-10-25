@@ -16,19 +16,11 @@
           <%= f.text_area :text, class: 'form-control' %>
         </div>
 
-        <div class="form-group">
-          <h4>タグ</h4>
-          <ul class="list-unstyled">
-            <% @tags.each do |tag| %>
-              <li>
-                <div class="form-check">
-                  <%= f.check_box :tag_ids, { multiple: true, id: "map_tag_ids", class: 'form-check-input' }, tag.id, nil %>
-                  <%= label_tag "map_tag_ids_#{tag.id}", tag.name, class: 'form-check-label' %>
-                </div>
-              </li>
-            <% end %>
-          </ul>
-        </div>
+        
+        <div class="field">
+         <%= f.label "タグ" %>
+         <%= f.text_field :name, value: @map.tags.pluck(:name).join(",") %>
+       </div>
 
         <div class="form-group">
           <%= f.submit '保存', class: 'btn btn-primary' %>
