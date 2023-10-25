@@ -20,7 +20,7 @@ class MapsController < ApplicationController
   end
   # GET /maps or /maps.json
   def index
-    @tags = Map.pluck(:tag).uniq # データベース内の全てのタグを取得
+    @tags = Tag.all # データベース内の全てのタグを取得
     @tag = params[:tag]
 
     @map = Map.new
