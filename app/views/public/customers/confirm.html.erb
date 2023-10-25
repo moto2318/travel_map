@@ -1,12 +1,17 @@
-<p>
-    退会すると、会員登録情報や<br>
-    これまでの購入履歴が閲覧できなくなります。<br>
-    退会する場合は、「退会する」をクリックしてください。
-</p>
+<div class="container py-2">
+  <div class="row mt-2 mb-3 offset-0 text-center">
+    <h4 class="p-2 mb-2 bg-light text-dark">退会手続き</h4>
+  </div>
 
-<div>
-    <%= link_to "退会しない", mypage_customers_path, :class => "btn btn-primary ms-3" %>
-</div>
-<div>
-    <%= link_to "退会する", customer_withdrawal_path(current_customer), method: :patch, :class => "btn btn-danger ms-3", deta: { confirm: "本当に退会しますか" }  %>
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <p>
+        退会すると、会員登録情報やこれまでの購入履歴が閲覧できなくなります。退会する場合は、「退会する」をクリックしてください。
+      </p>
+      <div class="btn-group">
+        <%= link_to "退会しない", mypage_customers_path, class: "btn btn-primary ms-3" %>
+        <%= link_to "退会する", customer_withdrawal_path(current_customer), method: :patch, class: "btn btn-danger ms-3", data: { confirm: "本当に退会しますか" } %>
+      </div>
+    </div>
+  </div>
 </div>
