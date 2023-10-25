@@ -14,10 +14,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 }
 
 
-devise_for :end_users,skip: [:passwords], controllers: {
-  registrations: "public/registrations",
-  sessions: 'public/sessions'
-}
 
 
   get "search" => "searches#search"
@@ -30,13 +26,11 @@ devise_for :end_users,skip: [:passwords], controllers: {
  end
 
   devise_scope :customer do
-
-    get '/customers/sign_out' => 'devise/sessions#destroy'
+    post 'customers/guest_sign_in', to: 'public/sessions#guest_sign_in'
+   # get '/customers/sign_out' => 'devise/sessions#destroy'
   end
 
-  devise_scope :end_user do
-    post 'end_users/guest_sign_in', to: 'public/sessions#guest_sign_in'
-  end
+ 
 
 
 
