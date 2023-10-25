@@ -1,21 +1,26 @@
-<div class-"row">
-    <h2>会員情報編集</h2>
-</div>
+<div class="container py-2">
+  <div class="row mt-2 mb-3 offset-0 text-center">
+    <h4 class="p-2 mb-2 bg-light text-dark">会員情報編集</h4>
+  </div>
 
-<%= form_with model: @customer do |f| %>
-    <table>
-        <tr>
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <%= form_with model: @customer do |f| %>
+        <table class="table table-list">
+          <tr>
             <td><%= f.label :name, "ニックネーム" %></td>
-            <td><%= f.text_field :name %></td>
-        </tr>
-        <tr>
+            <td><%= f.text_field :name, class: "form-control" %></td>
+          </tr>
+          <tr>
             <td><%= f.label :email, "メールアドレス" %></td>
-            <td><%= f.text_field :email %></td>
-        </tr>
-    </table>
-    <%= f.submit "編集内容を保存" %>
-    <% end %>
-
-    <div>
-        <%= link_to "退会する", customer_confirm_path(current_customer) %>
+            <td><%= f.text_field :email, class: "form-control" %></td>
+          </tr>
+        </table>
+        <%= f.submit "編集内容を保存", class: "btn btn-primary" %>
+      <% end %>
+        <div>
+            <%= link_to "退会する", customer_confirm_path(current_customer) %>
+        </div>
     </div>
+  </div>
+</div>

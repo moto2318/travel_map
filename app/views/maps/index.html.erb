@@ -158,14 +158,13 @@
                 console.log('here');
                 // Add the event listener after the InfoWindow is opened
                 google.maps.event.addListenerOnce(infoWindow, 'domready', function(){
-                  document.getElementById('popupbutton').reset().addEventListener('click', openModal)
+                  document.getElementById('popupbutton').addEventListener('click', openModal)
                   // click -> openModal()
                 });
               });
             } else {
               alert("Geocode was not successful for the following reason:" + status);
             }
-
           });
 
           // タグの絞り込み機能

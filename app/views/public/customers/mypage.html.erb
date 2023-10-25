@@ -5,13 +5,19 @@
       <div class="form-body p-4">
         <div class="mx-auto text-center">
           <strong>登録情報</strong>
-            <td>ニックネーム</td>
-            <td><%= current_customer.name %></td>
-            <td>メールアドレス</td>
-            <td><%= current_customer.email %></td>
-            <div class="btn">
-              <%= link_to "編集する", edit_customer_path(current_customer) %>
-            </div>
+          <table class="table table-bordered">
+            <tr>
+              <td>ニックネーム</td>
+              <td><%= current_customer.name %></td>
+            </tr>
+            <tr>
+              <td>メールアドレス</td>
+              <td><%= current_customer.email %></td>
+            </tr>
+          </table>
+          <div class="btn">
+            <%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-primary" %>
+          </div>
         </div>
       </div>
     </div>
@@ -24,16 +30,24 @@
       <h5 class="text-dark bg-light py-4 mb-0">投稿一覧</h5>
       <div class="form-body p-4">
         <div class="mx-auto text-center">
-          <tr>
-            <td>タイトル</td>
-            <td>詳細</td>
-            <td>住所</td>
-          </tr>
-          <% @maps.each do |map| %>
-            <div class="col"><%= link_to map.title, map_path(map) %></div>
-            <div class="col"><%= map.text %></div>
-            <div class="col"><%= map.address %></div>
-          <% end %>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>タイトル</th>
+                <th>詳細</th>
+                <th>住所</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @maps.each do |map| %>
+                <tr>
+                  <td><%= link_to map.title, map_path(map) %></td>
+                  <td><%= map.text %></td>
+                  <td><%= map.address %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

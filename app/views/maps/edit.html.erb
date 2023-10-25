@@ -1,25 +1,41 @@
-<h1>編集</h1>
-<%= form_with model: @map do |f|%>
+<div class="container py-2">
+  <div class="row mt-2 mb-3 offset-0 text-center">
+    <h4 class="p-2 mb-2 bg-light text-dark">編集</h4>
+  </div>
 
-    <h4>タイトル</h4>
-    <%= f.text_field :title %>
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <%= form_with model: @map, class: 'form' do |f| %>
+        <div class="form-group">
+          <%= f.label :title, class: 'h4' %>
+          <%= f.text_field :title, class: 'form-control' %>
+        </div>
 
-    <h4></h4>
-    <%= f.text_area :text %>
+        <div class="form-group">
+          <%= f.label :text, class: 'h4' %>
+          <%= f.text_area :text, class: 'form-control' %>
+        </div>
 
-    <table>タグ</table>
-  <ul>
-    <% @tags.each do |tag| %>
-        <%= f.check_box :tag_ids, { multiple: true, id: "map_tag_ids" }, tag.id, nil %>
-        <%= tag.name %>
-    <% end %>
-  </ul>
+        <div class="form-group">
+          <h4>タグ</h4>
+          <ul class="list-unstyled">
+            <% @tags.each do |tag| %>
+              <li>
+                <div class="form-check">
+                  <%= f.check_box :tag_ids, { multiple: true, id: "map_tag_ids", class: 'form-check-input' }, tag.id, nil %>
+                  <%= label_tag "map_tag_ids_#{tag.id}", tag.name, class: 'form-check-label' %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
 
-<%= f.submit '保存'%>
+        <div class="form-group">
+          <%= f.submit '保存', class: 'btn btn-primary' %>
+        </div>
 
-
-<%= link_to 'Show', @map %> |
-<%= link_to 'Back', maps_path %>
-
-
-<% end %>
+        <%= link_to '戻る', maps_path, class: 'btn btn-secondary' %>
+      <% end %>
+    </div>
+  </div>
+</div>
