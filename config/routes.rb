@@ -23,6 +23,7 @@ devise_for :end_users,skip: [:passwords], controllers: {
   get "search" => "searches#search"
   resources :pins
   resources :rails
+  
   resources :maps do
     get 'map', on: :collection
     get '/maps', to: 'maps#index'
