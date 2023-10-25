@@ -17,16 +17,15 @@
       </div>
     </div>
     <div class="col-lg-8">
-      <div class="text-dark bg-light py-4 mb-0">投稿一覧</div>
+      <div class="text-dark bg-light py-4 mb-0">投稿一覧<%= link_to "一覧", mypage_customers_path, class: "btn btn-primary ml-2" %></div>
       <p>ポップアップでのタイトル一覧機能は、旅行の思い出やお気に入りスポットを整理しやすくするための便利なツールです。この機能を使用すると、追加した場所ごとにタイトルを簡単に一覧表示できます。これにより、あなたのマップ上でどの場所にどんな思い出があるのかを素早く確認でき、特別な場所や体験に簡単にアクセスできます。さらに、タイトル欄にはその場所への思い出や理由を記入できるため、旅の思い出を豊かに共有し、簡単に振り返ることができます。この機能は、あなたの旅行プランをより楽しく、思い出深いものにするのに役立ちます。</p>
-      <h5 class="text-dark bg-light py-4 mb-0">マップの役割とできること</h5>
+      <h5 class="text-dark bg-light py-4 mb-0">マップの役割とできること<%= link_to "詳細", maps_path, class: "btn btn-primary ml-2" %></h5>
       <div class="form-body p-4">
         <table class="table table-striped">
           <tr>
             <td>マーカー設置機能</td>
             <td>
               この地図サイトの最も目立つ機能の一つが、マーカー設置機能です。これを使えば、地図上にカスタムマーカーを設置できます。行った場所や行きたい場所を指し示し、それぞれの場所を視覚的に区別できます。これにより、あなたの冒険やプランが一目でわかり、整理がしやすくなります。
-              <%= link_to "詳細", maps_path, class: "btn btn-primary ml-2" %>
             </td>
           </tr>
           <tr>

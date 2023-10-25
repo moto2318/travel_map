@@ -2,15 +2,14 @@
   <!-- ロゴ導入 -->
   <script src="https://kit.fontawesome.com/9cb9d691b6.js" crossorigin="anonymous"></script>
   <div class="row">
-    <h1 class="my-4">詳細</h1>
+    <h4>詳細</h4>
+    <h1 class="my-4"></h1>
 
     <div class="col-md-6">
       <p><strong>住所:</strong> <%= @map.address %></p>
       <p><strong>見出し:</strong> <%= @map.title %></p>
       <p><strong>説明:</strong> <%= @map.text %></p>
-    </div>
 
-    <div class="col-md-6">
       <p><strong>Tags:</strong></p>
       <ul class="list-unstyled">
         <% @map.tags.each do |tag| %>

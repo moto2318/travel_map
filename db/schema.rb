@@ -102,11 +102,9 @@ ActiveRecord::Schema.define(version: 2023_10_15_044724) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.integer "customer_id", null: false
     t.text "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["customer_id"], name: "index_tags_on_customer_id"
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
@@ -128,5 +126,4 @@ ActiveRecord::Schema.define(version: 2023_10_15_044724) do
   add_foreign_key "post_tags", "posts"
   add_foreign_key "post_tags", "tags"
   add_foreign_key "posts", "customers"
-  add_foreign_key "tags", "customers"
 end

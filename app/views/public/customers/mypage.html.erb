@@ -1,38 +1,13 @@
 <div class="container">
-  <div class="row no-gutters">
-    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto text-center shadow-lg rounded px-0 my-5">
-      <h5 class="text-dark bg-light py-4 mb-0">マイページ</h5>
-      <div class="form-body p-4">
-        <div class="mx-auto text-center">
-          <strong>登録情報</strong>
-          <table class="table table-bordered">
-            <tr>
-              <td>ニックネーム</td>
-              <td><%= current_customer.name %></td>
-            </tr>
-            <tr>
-              <td>メールアドレス</td>
-              <td><%= current_customer.email %></td>
-            </tr>
-          </table>
-          <div class="btn">
-            <%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-primary" %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="container">
-  <div class="row no-gutters">
-    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto text-center shadow-lg rounded px-0 my-5">
+  <div class="row ">
+    <div class="col">
       <h5 class="text-dark bg-light py-4 mb-0">投稿一覧</h5>
       <div class="form-body p-4">
         <div class="mx-auto text-center">
           <table class="table table-bordered">
             <thead>
               <tr>
+                <th>登録日</th>
                 <th>タイトル</th>
                 <th>詳細</th>
                 <th>住所</th>
@@ -41,6 +16,7 @@
             <tbody>
               <% @maps.each do |map| %>
                 <tr>
+                  <td><%= map.created_at.strftime("%Y年%m月%d日") %></td>
                   <td><%= link_to map.title, map_path(map) %></td>
                   <td><%= map.text %></td>
                   <td><%= map.address %></td>
