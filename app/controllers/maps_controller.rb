@@ -67,20 +67,6 @@ class MapsController < ApplicationController
   end
 
 
-  #タグの作成
-  # def create_tag
-  #   @post = Post.new(post_params)
-  #   @post.end_user_id = current_end_user.id
-  #   tag_list = params[:post][:name].split(',')
-  #   if @post.save
-  #     @post.save_tags(tag_list)
-  #     redirect_to maps_path, notice:'投稿が成功しました'
-  #   elsif
-  #     redirect_back(fallback_location: root_path)
-  #   end
-  # end
-
-
 
   # PATCH/PUT /maps/1 or /maps/1.json
   def update

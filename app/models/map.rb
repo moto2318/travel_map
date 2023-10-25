@@ -21,11 +21,11 @@ class Map < ApplicationRecord
 
     # 新しいタグを保存
     new_tags.each do |new|
-      new_post_tag = Tag.find_or_create_by(name: new)
+      new_post_tag = Tag.find_or_create_by(name: new, customer_id: customer_id)
       self.tags << new_post_tag
    end
   end
-  
+
   scope :has_tag_name_like, -> tag_name {
     joins(:tags).merge(Tags.name_like tag_name)
   }
