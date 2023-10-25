@@ -25,7 +25,7 @@
     <div id="map" class="show-map"></div>
       <div id="modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background-color:white; padding:20px; box-shadow:0 0 10px rgba(0,0,0,0.5);">
           <%= render 'form', map: @map %>
-          <button onclick="closeModal()">Close</button>
+          <button id="close" onclick="closeModal()">Close</button>
       </div>
 
       <script>
@@ -198,6 +198,39 @@
         function closeModal() {
           document.getElementById('modal').style.display = 'none';
         }
+        
+        // ページが読み込まれたら処理を実行する
+        document.addEventListener("DOMContentLoaded", function() {
+          // "close"ボタンを取得
+          var closeButton = document.getElementById("close");
+          var search_address_button = document.getElementById("search_address_button");
+          
+          
+          // "close"ボタンがクリックされたときの処理を追加
+          closeButton.addEventListener("click", function() {
+            // "hoge"テキストフィールドを取得
+            var textField = document.getElementById("map_title");
+            var textField2 = document.getElementById("map_text");
+            var textField3 = document.getElementById("map_name");
+            
+            // テキストフィールドの値をクリア
+            textField.value = "";
+            textField2.value = "";
+            textField3.value = "";
+          });
+          search_address_button.addEventListener("click", function() {
+            // "hoge"テキストフィールドを取得
+            var textField = document.getElementById("map_title");
+            var textField2 = document.getElementById("map_text");
+            var textField3 = document.getElementById("map_name");
+            
+            // テキストフィールドの値をクリア
+            textField.value = "";
+            textField2.value = "";
+            textField3.value = "";
+          });
+          
+        });
 
       </script>
       <!-- ここでGoogle Maps JavaScript APIを読み込み -->
