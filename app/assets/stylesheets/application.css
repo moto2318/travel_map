@@ -12,7 +12,24 @@
  *= require_tree .
  *= require_self
  */
- 
+ .head-color{
+   background-color: #f2f2f2;
+ }
+
+ .background-size{
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+ }
+
+ .main-color{
+   color: #EEFFFF;
+ }
+
+
+ .footer-color{
+   color: #808080
+ }
 
   .show-map {
   height: 80vh;
@@ -21,8 +38,8 @@
  }
 
  .u-black-bg {
-    background-color: #000; 
-    color: #fff; 
+    background-color: #000;
+    color: #fff;
   }
 
 

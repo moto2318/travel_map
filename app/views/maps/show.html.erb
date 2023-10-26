@@ -1,24 +1,36 @@
-<div class="container">
+<div class="container py-2">
   <!-- ロゴ導入 -->
   <script src="https://kit.fontawesome.com/9cb9d691b6.js" crossorigin="anonymous"></script>
-  <div class="row">
-    <h4>詳細</h4>
-    <h1 class="my-4"></h1>
+  <div class="row mt-2 mb-3 offset-0 text-center">
+    <h4 class="p-2 mb-2 bg-light text-dark">詳細</h4>
+  </div>
+    <thead>
+      <tr>
+        <th>会員ID</th>
+        <th>氏名</th>
+        <th>メールアドレス</th>
+        <th>ステータス</th>
+      </tr>
+    </thead>
 
-    <div class="col-md-6">
-      <p><strong>住所:</strong> <%= @map.address %></p>
-      <p><strong>見出し:</strong> <%= @map.title %></p>
-      <p><strong>説明:</strong> <%= @map.text %></p>
+    <tbody>
+      <h1 class="my-4"></h1>
+      <div class="col-md-6">
 
-      <p><strong>Tags:</strong></p>
-      <ul class="list-unstyled">
-        <% @map.tags.each do |tag| %>
-          <li>
-            #<%= link_to tag.name, root_path %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
+        <p><strong>住所:</strong> <%= @map.address %></p>
+        <p><strong>見出し:</strong> <%= @map.title %></p>
+        <p><strong>説明:</strong> <%= @map.text %></p>
+
+        <p><strong>Tags:</strong></p>
+        <ul class="list-unstyled">
+          <% @map.tags.each do |tag| %>
+            <li>
+              #<%= link_to tag.name, root_path %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </tbody>
 
     <div class="col-md-12 mt-3">
       <%= link_to 'Edit', edit_map_path(@map), class: "btn btn-primary mr-2" %>

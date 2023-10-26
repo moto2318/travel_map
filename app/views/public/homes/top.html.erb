@@ -1,46 +1,56 @@
-<div class="container">
-  <div class="row no-gutters">
-    <div class="col-lg-4 bg-orange p-4">
-      <h5 class="text-dark bg-light py-4 mb-0">登録情報</h5>
-      <table class="table">
-        <tr>
-          <th>ニックネーム:</th>
-          <td><%= current_customer.name %></td>
-        </tr>
-        <tr>
-          <th>メールアドレス:</th>
-          <td><%= current_customer.email %></td>
-        </tr>
-      </table>
-      <div class="text-center">
-        <%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-primary" %>
+<div class="container mt-5 mb-1">
+  <div class="row ">
+    <div class="col-lg-4">
+      <div class="container">
+        <div class="col border p-4 rounded bg-light">
+          <h5 class="text-dark bg-light py-4 mb-0">登録情報</h5>
+          <table class="table">
+            <tr>
+              <th>ニックネーム:</th>
+              <td><%= current_customer.name %></td>
+            </tr>
+            <tr>
+              <th>メールアドレス:</th>
+              <td><%= current_customer.email %></td>
+            </tr>
+          </table>
+          <div class="text-center">
+            <%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-outline-dark mr-3 ml-3" %>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-lg-8">
-      <div class="text-dark bg-light py-4 mb-0">投稿一覧<%= link_to "一覧", mypage_customers_path, class: "btn btn-primary ml-2" %></div>
-      <p>ポップアップでのタイトル一覧機能は、旅行の思い出やお気に入りスポットを整理しやすくするための便利なツールです。この機能を使用すると、追加した場所ごとにタイトルを簡単に一覧表示できます。これにより、あなたのマップ上でどの場所にどんな思い出があるのかを素早く確認でき、特別な場所や体験に簡単にアクセスできます。さらに、タイトル欄にはその場所への思い出や理由を記入できるため、旅の思い出を豊かに共有し、簡単に振り返ることができます。この機能は、あなたの旅行プランをより楽しく、思い出深いものにするのに役立ちます。</p>
-      <h5 class="text-dark bg-light py-4 mb-0">マップの役割とできること<%= link_to "詳細", maps_path, class: "btn btn-primary ml-2" %></h5>
-      <div class="form-body p-4">
-        <table class="table table-striped">
-          <tr>
-            <td>マーカー設置機能</td>
-            <td>
-              この地図サイトの最も目立つ機能の一つが、マーカー設置機能です。これを使えば、地図上にカスタムマーカーを設置できます。行った場所や行きたい場所を指し示し、それぞれの場所を視覚的に区別できます。これにより、あなたの冒険やプランが一目でわかり、整理がしやすくなります。
-            </td>
-          </tr>
-          <tr>
-            <td>ポップアップ機能</td>
-            <td>
-              各マーカーには、ポップアップ機能が付いています。これは、その場所がなぜお気に入りなのかを詳細に記入できるスペースです。思い出、感想、おすすめのメニュー、友達との楽しいエピソードなど、あなたの思い出をマーカーに関連付けて保存できます。後で振り返ると、その場所が特別な理由で溢れていることに気づくかもしれません。
-            </td>
-          </tr>
-          <tr>
-            <td>住所検索機能</td>
-            <td>
-              住所を覚える必要はもうありません。地図サイト内で直接住所を検索できます。どの場所でも、瞬時にその場所を探し出すことができます。これにより、新しい場所へのナビゲーションがスムーズになります。また、新たな場所を見つけたり友達と共有するのも簡単です。
-            </td>
-          </tr>
-        </table>
+
+    <div class="col">
+      <div class="container">
+        <div class="text-dark bg-light py-4 mb-0">
+          <div class="text-dark bg-light py-4 mb-0">投稿一覧<%= link_to "一覧", mypage_customers_path, class: "btn  btn-outline-dark mr-3 ml-3" %></div>
+          <p>ポップアップでのタイトル一覧機能は、旅行の思い出やお気に入りスポットを整理しやすくするための便利なツールです。この機能を使用すると、追加した場所ごとにタイトルを簡単に一覧表示できます。これにより、あなたのマップ上でどの場所にどんな思い出があるのかを素早く確認でき、特別な場所や体験に簡単にアクセスできます。さらに、タイトル欄にはその場所への思い出や理由を記入できるため、旅の思い出を豊かに共有し、簡単に振り返ることができます。この機能は、あなたの旅行プランをより楽しく、思い出深いものにするのに役立ちます。</p>
+        </div>
+        
+          <h5 class="text-dark bg-light py-4 mb-0 border p-4 rounded bg-light">マップの役割とできること<%= link_to "詳細", maps_path, class: "btn btn-outline-dark mr-3 ml-3" %></h5>
+          <div class="form-body p-4">
+            <table class="table table-striped">
+              <tr>
+                <td>マーカー設置機能</td>
+                <td>
+                  この地図サイトの最も目立つ機能の一つが、マーカー設置機能です。これを使えば、地図上にカスタムマーカーを設置できます。行った場所や行きたい場所を指し示し、それぞれの場所を視覚的に区別できます。これにより、あなたの冒険やプランが一目でわかり、整理がしやすくなります。
+                </td>
+              </tr>
+              <tr>
+                <td>ポップアップ機能</td>
+                <td>
+                  各マーカーには、ポップアップ機能が付いています。これは、その場所がなぜお気に入りなのかを詳細に記入できるスペースです。思い出、感想、おすすめのメニュー、友達との楽しいエピソードなど、あなたの思い出をマーカーに関連付けて保存できます。後で振り返ると、その場所が特別な理由で溢れていることに気づくかもしれません。
+                </td>
+              </tr>
+              <tr>
+                <td>住所検索機能</td>
+                <td>
+                  住所を覚える必要はもうありません。地図サイト内で直接住所を検索できます。どの場所でも、瞬時にその場所を探し出すことができます。これにより、新しい場所へのナビゲーションがスムーズになります。また、新たな場所を見つけたり友達と共有するのも簡単です。
+                </td>
+              </tr>
+            </table>
+          </div>
       </div>
     </div>
   </div>
