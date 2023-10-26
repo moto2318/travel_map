@@ -198,21 +198,21 @@
         function closeModal() {
           document.getElementById('modal').style.display = 'none';
         }
-        
+
         // ページが読み込まれたら処理を実行する
         document.addEventListener("DOMContentLoaded", function() {
           // "close"ボタンを取得
           var closeButton = document.getElementById("close");
           var search_address_button = document.getElementById("search_address_button");
-          
-          
+
+
           // "close"ボタンがクリックされたときの処理を追加
           closeButton.addEventListener("click", function() {
             // "hoge"テキストフィールドを取得
             var textField = document.getElementById("map_title");
             var textField2 = document.getElementById("map_text");
             var textField3 = document.getElementById("map_name");
-            
+
             // テキストフィールドの値をクリア
             textField.value = "";
             textField2.value = "";
@@ -223,18 +223,18 @@
             var textField = document.getElementById("map_title");
             var textField2 = document.getElementById("map_text");
             var textField3 = document.getElementById("map_name");
-            
+
             // テキストフィールドの値をクリア
             textField.value = "";
             textField2.value = "";
             textField3.value = "";
           });
-          
+
         });
 
       </script>
       <!-- ここでGoogle Maps JavaScript APIを読み込み -->
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7JXfKdyGbC5w6U1mZljK1ii619BA3mr0&libraries=places&callback=initMap" async defer></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['SECRET_KEY'] %>&libraries=places&callback=initMap" async defer></script>
 </div>
 
 <footer>

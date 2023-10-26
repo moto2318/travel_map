@@ -12,6 +12,7 @@
  *= require_tree .
  *= require_self
  */
+
  .head-color{
    background-color: #f2f2f2;
  }
@@ -28,7 +29,7 @@
 
 
  .footer-color{
-   color: #808080
+   background-color: #808080
  }
 
   .show-map {
