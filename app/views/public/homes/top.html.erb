@@ -23,13 +23,22 @@
 
     <div class="col">
       <div class="container">
-        <div class="text-dark bg-light py-4 mb-0">
-          <div class="text-dark bg-light py-4 mb-0">投稿一覧<%= link_to "一覧", mypage_customers_path, class: "btn  btn-outline-dark mr-3 ml-3" %></div>
-          <p>ポップアップでのタイトル一覧機能は、旅行の思い出やお気に入りスポットを整理しやすくするための便利なツールです。この機能を使用すると、追加した場所ごとにタイトルを簡単に一覧表示できます。これにより、あなたのマップ上でどの場所にどんな思い出があるのかを素早く確認でき、特別な場所や体験に簡単にアクセスできます。さらに、タイトル欄にはその場所への思い出や理由を記入できるため、旅の思い出を豊かに共有し、簡単に振り返ることができます。この機能は、あなたの旅行プランをより楽しく、思い出深いものにするのに役立ちます。</p>
+        <div class="text-dark bg-light ">
+          <tr>
+            <div class="text-dark bg-light py-4 mb-0 border p-4 rounded bg-light">
+              <td>
+                投稿一覧
+              </td>
+              <%= link_to "一覧", mypage_customers_path, class: "btn  btn-outline-dark mr-3 ml-3" %>
+            </div>
+          </tr>
+          <p class="text-dark bg-light py-4 mb-0 p-4">ポップアップでのタイトル一覧機能は、旅行の思い出やお気に入りスポットを整理しやすくするための便利なツールです。この機能を使用すると、追加した場所ごとにタイトルを簡単に一覧表示できます。これにより、あなたのマップ上でどの場所にどんな思い出があるのかを素早く確認でき、特別な場所や体験に簡単にアクセスできます。さらに、タイトル欄にはその場所への思い出や理由を記入できるため、旅の思い出を豊かに共有し、簡単に振り返ることができます。この機能は、あなたの旅行プランをより楽しく、思い出深いものにするのに役立ちます。</p>
         </div>
-        
-          <h5 class="text-dark bg-light py-4 mb-0 border p-4 rounded bg-light">マップの役割とできること<%= link_to "詳細", maps_path, class: "btn btn-outline-dark mr-3 ml-3" %></h5>
+      </div>
+
+        <divc class="container">
           <div class="form-body p-4">
+            <h5 class="text-dark bg-light py-4 mb-0 border  rounded bg-light">マップの役割とできること<%= link_to "詳細", maps_path, class: "btn btn-outline-dark mr-3 ml-3" %></h5>
             <table class="table table-striped">
               <tr>
                 <td>マーカー設置機能</td>
@@ -51,6 +60,7 @@
               </tr>
             </table>
           </div>
+        </div>
       </div>
     </div>
   </div>

@@ -1,44 +1,52 @@
 <div class="container py-2">
   <!-- ロゴ導入 -->
-  <script src="https://kit.fontawesome.com/9cb9d691b6.js" crossorigin="anonymous"></script>
-  <div class="row mt-2 mb-3 offset-0 text-center">
-    <h4 class="p-2 mb-2 bg-light text-dark">詳細</h4>
-  </div>
-    <thead>
-      <tr>
-        <th>会員ID</th>
-        <th>氏名</th>
-        <th>メールアドレス</th>
-        <th>ステータス</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <h1 class="my-4"></h1>
-      <div class="col-md-6">
-
-        <p><strong>住所:</strong> <%= @map.address %></p>
-        <p><strong>見出し:</strong> <%= @map.title %></p>
-        <p><strong>説明:</strong> <%= @map.text %></p>
-
-        <p><strong>Tags:</strong></p>
-        <ul class="list-unstyled">
-          <% @map.tags.each do |tag| %>
-            <li>
-              #<%= link_to tag.name, root_path %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    </tbody>
-
-    <div class="col-md-12 mt-3">
-      <%= link_to 'Edit', edit_map_path(@map), class: "btn btn-primary mr-2" %>
-      <%= link_to 'Back', maps_path, class: "btn btn-secondary mr-2" %>
-      <a class="twitter-share-button"
-        href="https://twitter.com/intent/tweet?text=<%= @map.title %>" target="_blank" rel="noopener">
-        <i class="fab fa-twitter" style="color: #1b6ebb;"></i>
-      </a>
+    <div class="row mt-2 mb-3 offset-0 text-center">
+      <h4 class="p-2 mb-2 bg-light text-dark">詳細</h4>
     </div>
-  </div>
+
+     <div class="form-body p-4">
+      <div class="mx-auto text-center">
+        <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>住所</th>
+            <th>見出し</th>
+            <th>説明</th>
+            <th>タグ</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <h1 class="my-4"></h1>
+          <div class="col-md-6">
+          <tr>
+            <td><%= @map.address %></td>
+            <td><%= @map.title %></td>
+            <td><%= @map.text %></td>
+            <td class="list-unstyled">
+              <% @map.tags.each do |tag| %>
+                <li>
+                  #<%= link_to tag.name, root_path %>
+                </li>
+              <% end %>
+            </td>
+            <script src="https://kit.fontawesome.com/9cb9d691b6.js" crossorigin="anonymous"></script>
+            </tr>
+          </div>
+          </tbody>
+        </table>
+
+            <div class="col-md-12 mt-3 ">
+              <%= link_to 'Edit', edit_map_path(@map), class: "btn btn-primary mr-2 text-white" %>
+              <%= link_to 'Back', maps_path, class: "btn btn-secondary mr-2 text-white" %>
+
+              <button class="btn btn-outline-primary btn-circle">
+                <a class="twitter-share-button"
+                  href="https://twitter.com/intent/tweet?text=<%= @map.title %>" target="_blank" rel="noopener">
+                  <i class="fab fa-twitter" style="color: #1b6ebb;"></i>
+                </a>
+              </button>
+            </div>
+      </div>
+    </div>
 </div>
