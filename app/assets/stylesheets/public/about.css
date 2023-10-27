@@ -1,1 +1,18 @@
+.full-width-image {
+  width: 100%;
+  height: auto;
+}
+
+.handwriting-font {
+   font-family: script, cursive;
+}
+
+
+.with-padding {
+  padding: 20px;
+}
+
+.with-margin {
+  margin: 20px 0; /* 上下に20ピクセルの余白を指定 */
+}
 

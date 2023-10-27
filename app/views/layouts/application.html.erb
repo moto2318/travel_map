@@ -24,10 +24,10 @@
                      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-dark mr-3 ml-3" %>
                     </li>
                 <% elsif customer_signed_in? %>
-                  <p>ようこそ、<%= current_customer.name %>さん！</p>
                   <li class="nav-item">
-                   <%= link_to "トップページ", root_path, class: "btn btn-outline-dark mr-3 ml-3" %>
+                   <%= link_to image_tag("旅マップ（色付き）.jpg", size: "200x50"), root_path, class: "btn mr-3 ml-3" %>
                   </li>
+                  <p>ようこそ、<%= current_customer.name %>さん！</p>
                   <li class="nav-item">
                    <%= link_to "マイページ", mypage_customers_path, class: "btn btn-outline-dark mr-3 ml-3" %>
                   </li>
@@ -38,6 +38,9 @@
                    <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-outline-dark mr-3 ml-3" %>
                   </li>
                 <% else %>
+                  <li class="nav-item">
+                   <%= link_to image_tag("旅マップ（色付き）.jpg", size: "200x50"), root_path, class: "btn mr-3 ml-3" %>
+                  </li>
                   <li class="nav-item">
                    <%= link_to "About", about_path, class: "btn btn-outline-dark mr-3 ml-3" %>
                   </li>
