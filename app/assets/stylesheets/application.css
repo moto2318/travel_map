@@ -14,8 +14,11 @@
  */
 
  .head-color{
-   background-color: #f2f2f2;
+  height: 130px;
+  width: 100%;
+  background-color: #f2f2f2;
  }
+
 
  .background-size{
   height: 100%;

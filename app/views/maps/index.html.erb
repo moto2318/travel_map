@@ -1,17 +1,18 @@
 <div class="containermb-2 mt-5 mb-5 ">
   <header>
-  <div class="search_map_container">
+  <div class="search_map_container text-center">
         <%# 検索したい住所や場所を入力するテキストボックス %>
      <input id="search_address" type="textbox" value="">
         <%# 処理を行うボタン %>
     <input id="search_address_button", type="button" value="検索" onclick="codeAddress()">
       <div>
           <%# 住所を表示する %>
-        <div id="result_address">住所が表示されます</div>
+        <div id="result_address"></div>
       </div>
         <%# 地図を表示する %>
       <div id='search_map'></div>
   </div>
+
   <div class="books-container">
     <% @tags.each do |tag| %>
       <div class="">
