@@ -6,6 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link href="https://fonts.googleapis.com/css?family=Sawarabi+Mincho" rel="stylesheet">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -15,7 +16,7 @@
         <header class="shadow-sm p-4 head-color">
           <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container justify-content-start ">
-                <ul class="nav nav-pills">
+                <ul class="nav nav-pills text-left">
                   <% if admin_signed_in? %>
                     <li class="nav-item">
                      <%= link_to "顧客一覧", admin_customers_path, class: "btn btn-outline-dark mr-3 ml-3" %>
@@ -24,7 +25,7 @@
                      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-dark mr-3 ml-3" %>
                     </li>
                 <% elsif customer_signed_in? %>
-                  <li class="nav-item">
+                  <li class="nav-item float-right">
                    <%= link_to image_tag("旅マップ（色付き）.jpg", size: "200x50"), root_path, class: "btn mr-3 ml-3" %>
                   </li>
                   <p>ようこそ、<%= current_customer.name %>さん！</p>
@@ -38,7 +39,7 @@
                    <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-outline-dark mr-3 ml-3" %>
                   </li>
                 <% else %>
-                  <li class="nav-item">
+                  <li class="nav-item float-right">
                    <%= link_to image_tag("旅マップ（色付き）.jpg", size: "200x50"), root_path, class: "btn mr-3 ml-3" %>
                   </li>
                   <li class="nav-item">
