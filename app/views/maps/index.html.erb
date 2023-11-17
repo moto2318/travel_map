@@ -38,7 +38,7 @@
         var currentMarker;
         var taggedPosts = <%= @tagged_posts_info.to_json.html_safe %>;
 
-          #東京を中心にする
+          #地図の初期化と中心地を東京にする
         function initMap() {
           var center = {
             lat: 35.6895,
@@ -84,6 +84,7 @@
 
         }
         <%# ボタンを押した時の処理 %>
+            # 住所検索の処理
           function codeAddress(){
             <%# 検索したいアドレスを取得 %>
             let inputAddress = document.getElementById('search_address').value;
@@ -130,7 +131,7 @@
 
             });
           }
-
+          # マーカー設置とInfoWindow表示
         function placeMarker(location) {
           const target = document.getElementById('modal');
           const style = window.getComputedStyle(target);
@@ -190,7 +191,7 @@
           //markers.push(marker);
         }
 
-
+        # ポップアップの表示非表示の制御
       // ディスプレイのポップアップをブロックとして表示する
         function openModal() {
           //document.getElementById('modal').style.display = 'block';
