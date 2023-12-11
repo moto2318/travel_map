@@ -25,10 +25,12 @@
 </header>
   <!-- app/views/maps/show.html.erb -->
     <div id="map" class="show-map"></div>
+    #ーー HTMLで表示されるポップアップの内容を表示するための部分ーー
       <div id="modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background-color:white; padding:20px; box-shadow:0 0 10px rgba(0,0,0,0.5);">
           <%= render 'form', map: @map %>
           <button id="close" onclick="closeModal()">Close</button>
       </div>
+    #ーー    ここまで ・ 他の要素は下                         ーー
 
       <script>
         var map;
